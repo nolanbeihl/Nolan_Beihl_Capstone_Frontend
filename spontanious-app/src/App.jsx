@@ -8,7 +8,10 @@ class App extends Component{
         super(props);
         this.state= {
             apiKey : 'AIzaSyBwQzBmt6jC2y_0yA8R3Cr9EduNwQL0hrQ',
-            address : ''
+            address : '',
+            lat: 0,
+            lng: 0,
+
 
         }
     }
@@ -20,10 +23,11 @@ class App extends Component{
 
     testlocation = async() =>{
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
-        debugger;
         this.setState({
-            address: [response.data.data]
+            lat: (response.data.location.lat),
+            lng: (response.data.location.lng)
         })
+        debugger;
         console.log(response.data)
     }
     
@@ -35,7 +39,8 @@ class App extends Component{
         return(
             <div className = 'container'>
                 <h1>Spontaneous</h1>
-                <div><p>{this.state.address}</p></div>
+                <div><p>{this.state.lat}</p></div>
+                <div><p>{this.state.lng}</p></div>
             </div>
             );
     }
