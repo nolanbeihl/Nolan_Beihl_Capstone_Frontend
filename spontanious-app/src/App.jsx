@@ -11,13 +11,14 @@ class App extends Component{
             address : '',
             lat: 0,
             lng: 0,
-
+            anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
 
         }
     }
 
     componentDidMount(){
         this.testlocation()
+        // this.convertlocation()
     }
 
 
@@ -27,13 +28,24 @@ class App extends Component{
             lat: (response.data.location.lat),
             lng: (response.data.location.lng)
         })
-        debugger;
-        console.log(response.data)
+        // let readableAddress = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${this.state.anotherKey}`)
+        // debugger;
+        // this.setState({
+        //     address : [readableAddress.data.location],
+        // })
+      
+        // console.log(readableAddress.data.results)
     }
     
-    // convertlocation = async() =>{
-    //     let response = await.axios
-    // }
+    convertlocation = async() =>{
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${this.state.anotherKey}`)
+        this.setState({
+            address : (response.data)
+        })
+        debugger;
+        console.log(response.data)
+     
+    }
 
     render() {
         return(
@@ -41,8 +53,11 @@ class App extends Component{
                 <h1>Spontaneous</h1>
                 <div><p>{this.state.lat}</p></div>
                 <div><p>{this.state.lng}</p></div>
+                <button onClick={this.convertlocation()}>Convert Location</button>
+                <div><p>{this.state.address}</p></div>
             </div>
             );
+            debugger;
     }
 
 }
