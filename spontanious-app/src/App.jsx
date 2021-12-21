@@ -1,6 +1,11 @@
 import React, { useDebugValue } from "react";
 import axios from 'axios';
 import {Component} from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown'
+import Entertainment from "./Components/Entertainment/Entertainment";
+
 
 
 class App extends Component{
@@ -15,6 +20,10 @@ class App extends Component{
             readableAddress : '',
             restaruantPick : [],
             entertainmentPick : [],
+            distance : 0,
+            options : ['amusement_park','bowling_alley','museum','night_club','aquarium,casino','tourist_attraction','zoo'],
+            optionPicked : '',
+
         }
     }
 
@@ -23,7 +32,6 @@ class App extends Component{
         // this.convertlocation()
         // this.nearbyRestaurant()
     }
-
 
     explorerLocation = async() =>{ 
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
@@ -41,8 +49,9 @@ class App extends Component{
         })
         alert(response.data.results[0].formatted_address)
     }
+
     nearbyRestaurant = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=5000&type=restaurant&key=AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=5000&type=restaurant&key=${this.state.anotherKey}`)
         this.setState({
             restaurants : [response.data]
         })
@@ -54,31 +63,34 @@ class App extends Component{
             restaruantPick : [anotherchoice]
         })
     }
-    nearbyEntertainment = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=5000&type=entertainment&key=AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo`)
-        this.setState({
-            entertainments : [response.data]
-        })
-        var choice = [response.data.results];
-        var randomchoice = choice[Math.floor(Math.random()*choice.length)];
-        var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-        alert(`${anotherchoice.name}, ${anotherchoice.rating}, ${anotherchoice.price_level}`)
-        this.setState({
-            entertainmentPick : [anotherchoice]
-        })
-    }
-  
+    
 
-    render() {
+    // nearbyEntertainment = async(props) =>{
+    //     let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=50000&type=${this.state.optionPicked}&type=${props}&key=${this.state.anotherKey}`)
+    //     this.setState({
+    //         entertainments : [response.data]
+    //     })
+    //     var choice = [response.data.results];
+    //     var randomchoice = choice[Math.floor(Math.random()*choice.length)];
+    //     var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
+    //     debugger;
+    //     alert(`${anotherchoice.name}, ${anotherchoice.rating}, ${anotherchoice.price_level}`)
+    //     this.setState({
+    //         entertainmentPick : [anotherchoice]
+    //     })
+    // }
   
+    render() {
         return(
             <div className='container'>
                 <h1>Spontaneous</h1>   
                 <button onClick={this.explorerLocation}>Get Location</button>
                 <button onClick={this.convertLocation}>Convert Location</button>
                 <button onClick={this.nearbyRestaurant}>Find Restaurants</button>
-                <button onClick={this.nearbyEntertainment}>Find Entertainment</button>
+                {/* <button onClick={this.nearbyEntertainment}>Find Entertainment</button> */}
+                <Entertainment options={this.state.options}/>
                 <div><p>{this.state.readableAddress}</p></div>
+            
             </div>
                 
         )
