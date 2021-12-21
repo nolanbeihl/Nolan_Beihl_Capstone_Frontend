@@ -12,6 +12,7 @@ class App extends Component{
             lat: 23.000,
             lng: 115.000,
             anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
+            readableAddress : ''
 
         }
     }
@@ -19,6 +20,7 @@ class App extends Component{
     componentDidMount(){
         this.testlocation()
         this.convertlocation()
+        this.nearbyRestaurant()
     }
 
 
@@ -28,22 +30,25 @@ class App extends Component{
             lat: (response.data.location.lat),
             lng: (response.data.location.lng)
         })
-        // let readableAddress = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${this.state.anotherKey}`)
-        // debugger;
-        // this.setState({
-        //     address : [readableAddress.data.location],
-        // })
-        // console.log[readableAddress.data]
     }
     
     convertlocation = async() =>{
         let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${this.state.anotherKey}`)
         this.setState({
             address : [response.data.data],
+            readableAddress : (response.data.results[0].formatted_address),
         })
-        console.log('converted locaiton: ',response.data.results)
+
         alert(response.data.results[0].formatted_address)
      
+    }
+    nearbyRestaurant = async() =>{
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=5000&type=restaurant&key=AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo`)
+        this.setState({
+            restaurants : [response.data]
+        })
+        debugger;
+        alert(response.data)
     }
     
     
@@ -56,7 +61,8 @@ class App extends Component{
                 <div><p>{this.state.lat}</p></div>
                 <div><p>{this.state.lng}</p></div>
                 <button onClick={this.convertlocation}>Convert Location</button>
-                <div><p>{this.state.address}</p></div>
+                <button onClick={this.nearbyRestaurant}>Find restaurants</button>
+                <div><p>{this.state.readableAddress}</p></div>
             </div>
             );
            
