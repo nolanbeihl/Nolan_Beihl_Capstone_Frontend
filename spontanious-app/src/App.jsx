@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import Entertainment from "./Components/Entertainment/Entertainment";
+import Explorer from './Components/Explorer/Explorer';
 
 
 
@@ -28,9 +29,9 @@ class App extends Component{
     }
 
     componentDidMount(){
-        // this.testlocation()
-        // this.convertlocation()
-        // this.nearbyRestaurant()
+        this.explorerLocation()
+        this.convertLocation()
+        this.nearbyRestaurant()
     }
 
     explorerLocation = async() =>{ 
@@ -65,30 +66,33 @@ class App extends Component{
     }
     
 
-    // nearbyEntertainment = async(props) =>{
-    //     let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=50000&type=${this.state.optionPicked}&type=${props}&key=${this.state.anotherKey}`)
-    //     this.setState({
-    //         entertainments : [response.data]
-    //     })
-    //     var choice = [response.data.results];
-    //     var randomchoice = choice[Math.floor(Math.random()*choice.length)];
-    //     var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-    //     debugger;
-    //     alert(`${anotherchoice.name}, ${anotherchoice.rating}, ${anotherchoice.price_level}`)
-    //     this.setState({
-    //         entertainmentPick : [anotherchoice]
-    //     })
-    // }
+    nearbyEntertainment = async(props) =>{
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=50000&type=${this.state.options}&key=${this.state.anotherKey}`)
+        this.setState({
+            entertainments : [response.data]
+        })
+        var choice = [response.data.results];
+        var randomchoice = choice[Math.floor(Math.random()*choice.length)];
+        var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
+        debugger;
+        alert(`Name:  ${anotherchoice.name} Rating:  ${anotherchoice.rating} Price Level:  ${anotherchoice.price_level}`)
+        this.setState({
+            entertainmentPick : [anotherchoice]
+        })
+    }
+
   
     render() {
         return(
             <div className='container'>
                 <h1>Spontaneous</h1>   
+                <p>{this.state.address}</p>
                 <button onClick={this.explorerLocation}>Get Location</button>
                 <button onClick={this.convertLocation}>Convert Location</button>
                 <button onClick={this.nearbyRestaurant}>Find Restaurants</button>
-                {/* <button onClick={this.nearbyEntertainment}>Find Entertainment</button> */}
-                <Entertainment options={this.state.options}/>
+                <button onClick={this.nearbyEntertainment}>Find Entertainment</button>
+                <Explorer />
+                
                 <div><p>{this.state.readableAddress}</p></div>
             
             </div>
