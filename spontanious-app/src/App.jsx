@@ -6,17 +6,18 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import Entertainment from "./Components/Entertainment/Entertainment";
 import Explorer from './Components/Explorer/Explorer';
-import EntertainmentChoice from './Components/Entertainment';
+import EntertainmentChoice from './Components/Entertainment/Entertainment';
 
 
-const options =['amusement_park','bowling_alley','museum','night_club','aquarium,casino','tourist_attraction','zoo'];
+const options =[{id: 1, value: 'amusement_park',},{id :2, value: 'bowling_alley',},{id :3, value:'museum',},{id: 4, value: 'night_club',},{id:5, value:'aquarium',}, {id:6, value: 'casino',},{id:7, value: 'tourist_attraction',},{id:8, value: 'zoo',}];
+
 
 function App() {
     return(
         <div className="container">
-            <EntertainmentChoice title="Select Entertainment Type" items={options}/>
+            <EntertainmentChoice title="Select Entertainment Type" items={[options]}/>
         </div>
-
+      
     );
 }
 

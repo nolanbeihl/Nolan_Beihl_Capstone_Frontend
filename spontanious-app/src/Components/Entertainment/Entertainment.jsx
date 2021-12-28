@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import onClickOutside from 'react-onclickoutside';
+// import onClickOutside from 'react-onclickoutside';
 
 
 function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
-    EntertainmentChoice.handleClickOutside = () => setOpen(false);
+    // EntertainmentChoice.handleClickOutside = () => setOpen(false);
 
     function handleOnClick(item) {
-        if (!selection.some(current => current == current)) {
+        if (!selection.some(current => current.id === item.id)) {
             if (!multiSelect){
                 setSelection([item]);}
                 else if (multiSelect) {
@@ -19,17 +19,17 @@ function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
             else {
                 let selectionAfterRemoval = selection;
                 selectionAfterRemoval = selectionAfterRemoval.filter(
-                    current => current != current
+                    current => current.id !== item.id
                 );
                 setSelection([...selectionAfterRemoval]);
             }
         }
-        function choiceSelected(item) {
-            if (selection.find(current => current == current)) {
-                return true;
-            }
-            return false;
+    function choiceSelected(item) {
+        if (selection.find(current => current.id === item.id)) {
+            return true;
         }
+        return false;
+    }
     
     return(
         <div className="entertainment-dropdown">
@@ -44,9 +44,9 @@ function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
             {open && (
                 <ul className="ed-list">
                     {items.map(item => (
-                        <li className="ed-list-item" key={item}>
+                        <li className="ed-list-item" key={item.id}>
                             <button type="button" onClick={() => handleOnClick(item)}>
-                                <span>{item}</span>
+                                <span>{item.value}</span>
                                 <span>{choiceSelected(item) && 'Great Choice'}</span>
                             </button>
                         </li>
@@ -56,8 +56,10 @@ function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
             </div>
     );
 }
-const clickOutsideConfig = {
-    handleClickOutside : () => EntertainmentChoice.handleOnClick,
-};
+// const clickOutsideConfig = {
+//     handleClickOutside : () => EntertainmentChoice.handleOnClick,
+// };
 
-export default onClickOutside(EntertainmentChoice , clickOutsideConfig) ;
+// export default onClickOutside(EntertainmentChoice , clickOutsideConfig) ;
+
+export default EntertainmentChoice;
