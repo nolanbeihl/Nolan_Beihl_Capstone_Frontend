@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import onClickOutside from 'react-onclickoutside';
 
 
-function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
+function EntertainmentChoice ({ title, items, multiSelect = false}) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
@@ -13,7 +13,7 @@ function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
             if (!multiSelect){
                 setSelection([item]);}
                 else if (multiSelect) {
-                    setSelection([...selection, item]);
+                setSelection([...selection, item]);
                 } 
             }
             else {
@@ -33,23 +33,29 @@ function EntertainmentChoice ({ title, items = [], multiSelect = false}) {
     
     return(
         <div className="entertainment-dropdown">
-            <div tabIndex={0} className="ed-header" role="button" onKeyPress={() => toggle(!open)} onClick={() => toggle(!open)}>
+            <div 
+                tabIndex={0}
+                className="ed-header" 
+                role="button" 
+                onKeyPress={() => toggle(!open)} 
+                onClick={() => toggle(!open)}
+                >
                 <div className="ed-header_title">
                     <p className="ed-header_title--bold">{title}</p>
                 </div>
                 <div className="ed-header_action">
-                    <p>{open ? 'Entertainment Types' : 'Please make a selection'}</p>
+                    <p>{open ? 'Chose One Below' : 'Please Make a Selection'}</p>
                 </div>
             </div>
             {open && (
                 <ul className="ed-list">
                     {items.map(item => (
-                        <li className="ed-list-item" key={item.id}>
+                        <ul className="ed-list-item" key={item.id}>
                             <button type="button" onClick={() => handleOnClick(item)}>
                                 <span>{item.value}</span>
-                                <span>{choiceSelected(item) && 'Great Choice'}</span>
+                                <span>{choiceSelected(item) && '         That should be fun!'}</span>
                             </button>
-                        </li>
+                        </ul>
                     ))}
                 </ul>
             )}
