@@ -6,7 +6,6 @@ function EntertainmentChoice ({ title, items, multiSelect = false}) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
-    // EntertainmentChoice.handleClickOutside = () => setOpen(false);
 
     function handleOnClick(item) {
         if (!selection.some(current => current.id === item.id)) {
@@ -26,6 +25,7 @@ function EntertainmentChoice ({ title, items, multiSelect = false}) {
         }
     function choiceSelected(item) {
         if (selection.find(current => current.id === item.id)) {
+            this.state.selection = {item}
             return true;
         }
         return false;
@@ -62,10 +62,5 @@ function EntertainmentChoice ({ title, items, multiSelect = false}) {
             </div>
     );
 }
-// const clickOutsideConfig = {
-//     handleClickOutside : () => EntertainmentChoice.handleOnClick,
-// };
-
-// export default onClickOutside(EntertainmentChoice , clickOutsideConfig) ;
 
 export default EntertainmentChoice;
