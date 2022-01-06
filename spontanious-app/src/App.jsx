@@ -170,7 +170,9 @@ class App extends Component{
         if ((choice.opening_hours) = true)
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-            alert(`Restaurant Name: ${anotherchoice.name}\nRestaurant Rating: ${anotherchoice.rating}\nRestaurant Price Level:  ${anotherchoice.price_level}\nRestaurant Address: ${anotherchoice.vicinity}`)
+            var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
+            // var reviews = place_review.map(place_review.data.result.reviews)
+            alert(`Restaurant Name: ${anotherchoice.name}\nRestaurant Rating: ${anotherchoice.rating}\nRestaurant Price Level:  ${anotherchoice.price_level}\nRestaurant Address: ${anotherchoice.vicinity}\nReviews: ${place_review.data.result.reviews[0].text}`)
             this.setState({
                 restaruantPick : [anotherchoice]
             })
@@ -185,7 +187,8 @@ class App extends Component{
         if ((choice.opening_hours) = true && ((choice) != "lodging"))
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-            alert(`Name:  ${anotherchoice.name}\nRating:  ${anotherchoice.rating}\nPrice Level:  ${anotherchoice.price_level} Entertainment Address:  ${anotherchoice.vicinity}`)
+            var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
+            alert(`Name:  ${anotherchoice.name}\nRating:  ${anotherchoice.rating}\nPrice Level:  ${anotherchoice.price_level}\nEntertainment Address:  ${anotherchoice.vicinity}\nReviews: ${place_review.data.result.reviews[0].text}`)
             this.setState({
                 entertainmentPick : [anotherchoice]
             })
