@@ -9,94 +9,95 @@ import Explorer from './Components/Explorer/Explorer';
 import EntertainmentChoice from './Components/Entertainment/Entertainment';
 import RestaurantChoice from "./Components/Restaurant/Restaurant";
 import './index.css';
+import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentModal";
+import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 
 
+const entOptions = [
+    {
+        id: 1, 
+        value: 'amusement_park',
+    },
+    {
+        id :2,
+        value: 'bowling_alley',
+    },
+    {
+        id: 3,
+        value:'museum',
+    },
+    {
+        id: 4, 
+        value: 'night_club',
+    },
+    {
+        id: 5, 
+        value:'aquarium',
+    },
+    {
+        id: 6,
+        value: 'casino',
+    },
+    {
+        id: 7, 
+        value: 'tourist_attraction',
+    },
+    {
+        id: 8, 
+        value: 'zoo',
+    }
+];
 
-// const entOptions = [
-//     {
-//         id: 1, 
-//         value: 'amusement_park',
-//     },
-//     {
-//         id :2,
-//         value: 'bowling_alley',
-//     },
-//     {
-//         id: 3,
-//         value:'museum',
-//     },
-//     {
-//         id: 4, 
-//         value: 'night_club',
-//     },
-//     {
-//         id: 5, 
-//         value:'aquarium',
-//     },
-//     {
-//         id: 6,
-//         value: 'casino',
-//     },
-//     {
-//         id: 7, 
-//         value: 'tourist_attraction',
-//     },
-//     {
-//         id: 8, 
-//         value: 'zoo',
-//     }
-// ];
+const foodOptions = [
+    {
+        id: 1, 
+        name: 'bar',
+    },
+    {
+        id :2,
+        name: 'meal_takeaway',
+    },
+    {
+        id: 3,
+        name:'meal_delivery',
+    },
+    {
+        id: 4, 
+        name: 'bakery',
+    },
+    {
+        id: 5, 
+        name:'restaurant',
+    },
+];
 
-// const foodOptions = [
-//     {
-//         id: 1, 
-//         name: 'bar',
-//     },
-//     {
-//         id :2,
-//         name: 'meal_takeaway',
-//     },
-//     {
-//         id: 3,
-//         name:'meal_delivery',
-//     },
-//     {
-//         id: 4, 
-//         name: 'bakery',
-//     },
-//     {
-//         id: 5, 
-//         name:'restaurant',
-//     },
-// ];
-
-// const priceLevel = [
-//     {
-//         id: 1, 
-//         value: '0',
-//         name: 'Cheap',
-//     },
-//     {
-//         id :2,
-//         value: '1',
-//         name: 'Not very much',
-//     },
-//     {
-//         id: 3,
-//         value:'2',
-//         name: 'Moderate',
-//     },
-//     {
-//         id: 4, 
-//         value: '3',
-//         name: 'A little high',
-//     },
-//     {
-//         id: 5, 
-//         value:'4',
-//         name: 'Are You Have Enough?',
-//     },
-// ];
+const priceLevel = [
+    {
+        id: 1, 
+        value: '0',
+        name: 'Cheap',
+    },
+    {
+        id :2,
+        value: '1',
+        name: 'Not very much',
+    },
+    {
+        id: 3,
+        value:'2',
+        name: 'Moderate',
+    },
+    {
+        id: 4, 
+        value: '3',
+        name: 'A little high',
+    },
+    {
+        id: 5, 
+        value:'4',
+        name: 'Are You Have Enough?',
+    },
+];
 
 // function funcApp() {
 //     return(
@@ -134,7 +135,8 @@ class App extends Component{
             options : ['amusement_park','bowling_alley','museum','night_club','aquarium,casino','tourist_attraction','zoo'],
             optionPicked : '',
             choice : 'night_club',
-
+            rest_review : '',
+            ent_review : '',
         }
     }
 
@@ -166,15 +168,16 @@ class App extends Component{
         this.setState({
             restaurants : [response.data]
         })
+        debugger;
         var choice = [response.data.results];
         if ((choice.opening_hours) = true)
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            // var reviews = place_review.map(place_review.data.result.reviews)
-            alert(`Restaurant Name: ${anotherchoice.name}\nRestaurant Rating: ${anotherchoice.rating}\nRestaurant Price Level:  ${anotherchoice.price_level}\nRestaurant Address: ${anotherchoice.vicinity}\nReviews: ${place_review.data.result.reviews[0].text}`)
+            // alert(`Restaurant Name: ${anotherchoice.name}\nRestaurant Rating: ${anotherchoice.rating}\nRestaurant Price Level:  ${anotherchoice.price_level}\nRestaurant Address: ${anotherchoice.vicinity}\nReviews: ${anotherchoice.reviews}`)
             this.setState({
-                restaruantPick : [anotherchoice]
+                restaruantPick : anotherchoice,
+                rest_review : place_review
             })
     }
     
@@ -183,15 +186,22 @@ class App extends Component{
         this.setState({
             entertainments : [response.data]
         })
+        debugger;
         var choice = [response.data.results];
         if ((choice.opening_hours) = true && ((choice) != "lodging"))
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            alert(`Name:  ${anotherchoice.name}\nRating:  ${anotherchoice.rating}\nPrice Level:  ${anotherchoice.price_level}\nEntertainment Address:  ${anotherchoice.vicinity}\nReviews: ${place_review.data.result.reviews[0].text}`)
             this.setState({
-                entertainmentPick : [anotherchoice]
+                entertainmentPick : anotherchoice,
+                ent_review : place_review
             })
+    }
+
+    thingToPassDown = async(thingToSetStateWith)=>{
+        this.setState({
+            entertainmentpick : thingToSetStateWith
+        })
     }
   
     render() {
@@ -203,12 +213,12 @@ class App extends Component{
                 </div><button class="button"  onClick={this.convertLocation}>Get Location</button>
                 <div class="row"></div>
                 <button class="button" onClick={this.nearbyRestaurant}>Find Restaurants</button>
-                <div class="row"></div>
-                <button class='button' onClick={this.nearbyEntertainment}>Find Entertainment</button>     
-                                                    
+                <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
+                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>
+                <Entertainment stateFunction = {this.thingToPassDown} title="Options" items={entOptions}></Entertainment>                   
             </div>
                 
-        )
+        );
 
 }}
 

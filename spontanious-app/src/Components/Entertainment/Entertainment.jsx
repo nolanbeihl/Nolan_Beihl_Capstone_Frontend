@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import onClickOutside from 'react-onclickoutside';
 
 
-function EntertainmentChoice ({ title, items, multiSelect = false}) {
+function EntertainmentChoice ({ stateFunction, title, items, multiSelect = false}) {
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState([]);
     const toggle = () => setOpen(!open);
@@ -26,6 +26,7 @@ function EntertainmentChoice ({ title, items, multiSelect = false}) {
     function choiceSelected(item) {
         if (selection.find(current => current.id === item.id)) {
             this.state.selection = {item}
+            stateFunction(item)
             return true;
         }
         return false;
