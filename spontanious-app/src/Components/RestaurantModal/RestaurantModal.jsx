@@ -9,7 +9,7 @@ function RestaurantModal (props){
 
 return ( 
             <div className='RestaurantModal'>
-                <button onClick={() => setItemIsOpen(true)}>Find A Restaurant </button> 
+                <button onClick={() => setItemIsOpen(true)}>Restaurant </button> 
                 <Modal isOpen={itemIsOpen}>
                     <button onClick={() => props.func()}>Find Another Option</button>
                     <div>

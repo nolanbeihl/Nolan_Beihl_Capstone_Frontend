@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import Modal from 'react-modal';
 import App from '../../App';
+import EntertainmentChoice from '../Entertainment/Entertainment';
 
 
 function EntertainmentModal (props){
@@ -9,7 +10,7 @@ function EntertainmentModal (props){
 
 return ( 
             <div className='EntertainmentModal'>
-                <button onClick={() => setItemIsOpen(true)}>Find Entertainment </button> 
+                <button onClick={() => setItemIsOpen(true)}>Entertainment </button> 
                 <Modal isOpen={itemIsOpen}>
                     <button onClick={() => props.func()}>Find New Option</button>
                     <div>

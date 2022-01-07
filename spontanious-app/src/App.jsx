@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import axios from 'axios';
 import {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,6 +11,7 @@ import RestaurantChoice from "./Components/Restaurant/Restaurant";
 import './index.css';
 import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentModal";
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
+import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 
 
 const entOptions = [
@@ -160,6 +161,7 @@ class App extends Component{
             address : [response.data.data],
             readableAddress : (response.data.results[0].formatted_address),
         })
+        debugger;
         alert(`${response.data.results[0].formatted_address} Is your current address`)
     }
 
@@ -168,13 +170,11 @@ class App extends Component{
         this.setState({
             restaurants : [response.data]
         })
-        debugger;
         var choice = [response.data.results];
         if ((choice.opening_hours) = true)
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            // alert(`Restaurant Name: ${anotherchoice.name}\nRestaurant Rating: ${anotherchoice.rating}\nRestaurant Price Level:  ${anotherchoice.price_level}\nRestaurant Address: ${anotherchoice.vicinity}\nReviews: ${anotherchoice.reviews}`)
             this.setState({
                 restaruantPick : anotherchoice,
                 rest_review : place_review
@@ -186,7 +186,6 @@ class App extends Component{
         this.setState({
             entertainments : [response.data]
         })
-        debugger;
         var choice = [response.data.results];
         if ((choice.opening_hours) = true && ((choice) != "lodging"))
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
@@ -207,12 +206,11 @@ class App extends Component{
     render() {
         return(
             <div className='container'>
-                <h1>Spontaneous Adventure</h1>   
+                <h1>Select a type of Spontaneous Adventure</h1>   
                 <div class="container">
                 <div class="row"></div>
                 </div><button class="button"  onClick={this.convertLocation}>Get Location</button>
-                <div class="row"></div>
-                <button class="button" onClick={this.nearbyRestaurant}>Find Restaurants</button>
+                <ExplorerModal func = {this.convertLocation}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>
                 <Entertainment stateFunction = {this.thingToPassDown} title="Options" items={entOptions}></Entertainment>                   

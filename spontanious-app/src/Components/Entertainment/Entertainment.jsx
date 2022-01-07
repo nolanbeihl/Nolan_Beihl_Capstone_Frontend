@@ -25,7 +25,7 @@ function EntertainmentChoice ({ stateFunction, title, items, multiSelect = false
         }
     function choiceSelected(item) {
         if (selection.find(current => current.id === item.id)) {
-            this.state.selection = {item}
+            this.state.selection === {item}
             stateFunction(item)
             return true;
         }
