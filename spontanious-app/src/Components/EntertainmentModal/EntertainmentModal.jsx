@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 import Modal from 'react-modal';
 import App from '../../App';
-import EntertainmentChoice from '../Entertainment/Entertainment';
+import EntertainmentChoice from '../UserChoice/UserChoice';
 
 
 function EntertainmentModal (props){

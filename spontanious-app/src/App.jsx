@@ -4,14 +4,14 @@ import {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import Entertainment from "./Components/Entertainment/Entertainment";
+import Entertainment from "./Components/UserChoice/UserChoice";
 import Explorer from './Components/Explorer/Explorer';
-import EntertainmentChoice from './Components/Entertainment/Entertainment';
 import RestaurantChoice from "./Components/Restaurant/Restaurant";
 import './index.css';
 import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentModal";
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
+import UserChoice from "./Components/UserChoice/UserChoice";
 
 
 const entOptions = [
@@ -100,6 +100,36 @@ const priceLevel = [
     },
 ];
 
+const radiusOptions = [
+    {
+        id: 1, 
+        value: '1000',
+        name: 'Close',
+    },
+    {
+        id :2,
+        value: '5000',
+        name: 'Not Too Far',
+    },
+    {
+        id: 3,
+        value:'10000',
+        name: 'Probably Need A ride',
+    },
+    {
+        id: 4, 
+        value: '20000',
+        name: 'I Would Drive',
+    },
+    {
+        id: 5, 
+        value:'50000',
+        name: 'Definitely Driving',
+    },
+];
+
+
+
 // function funcApp() {
 //     return(
 //         <div className="container">
@@ -125,19 +155,21 @@ class App extends Component{
         super(props);
         this.state= {
             apiKey : 'AIzaSyBwQzBmt6jC2y_0yA8R3Cr9EduNwQL0hrQ',
-            address : '',
+            address : '0',
             lat: +38.9072,
             lng: -77.0369,
             anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
-            readableAddress : '',
+            readableAddress : '0',
             restaruantPick : [],
             entertainmentPick : [],
             distance : 0,
             options : ['amusement_park','bowling_alley','museum','night_club','aquarium,casino','tourist_attraction','zoo'],
-            optionPicked : '',
+            optionPicked : '0',
             choice : 'night_club',
-            rest_review : '',
-            ent_review : '',
+            rest_review : '0',
+            ent_review : '0',
+            radius: '1000',
+            priceLevel: '2',
         }
     }
 
@@ -162,9 +194,10 @@ class App extends Component{
             readableAddress : (response.data.results[0].formatted_address),
         })
     }
+  
 
     nearbyRestaurant = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=5000&type=restaurant&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
         this.setState({
             restaurants : [response.data]
         })
@@ -180,7 +213,7 @@ class App extends Component{
     }
     
     nearbyEntertainment = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=50000&type=${this.state.choice}&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.choice}&key=${this.state.anotherKey}`)
         this.setState({
             entertainments : [response.data]
         })
@@ -195,9 +228,25 @@ class App extends Component{
             })
     }
 
-    thingToPassDown = async(thingToSetStateWith)=>{
+    setEntertainment = async(setEntertainment)=>{
         this.setState({
-            entertainmentpick : thingToSetStateWith
+            entertainmentpick : setEntertainment
+        })
+    }
+    
+    setLocation = async(setRadius) => {
+        this.setState({
+            radius : setRadius
+        })
+    }
+    setRestaurant = async(setRestaurant) => {
+        this.setState({
+            restaurantPick : setRestaurant
+        })
+    }
+    setPriceLevel = async(setPrice) => {
+        this.setState({
+            priceLevel : setPrice
         })
     }
   
@@ -208,10 +257,13 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div>
+                <UserChoice stateFunction = {this.setPriceLevel} title="Pick Price Level" items={priceLevel}></UserChoice>
+                <UserChoice stateFunction = {this.setRestaurant} title="Pick Restaurant Type" items={foodOptions}></UserChoice>
+                <UserChoice stateFunction = {this.setEntertainment} title="Pick Entertainment Type" items={entOptions}></UserChoice>
+                <UserChoice stateFunction = {this.setLocation} title="Set Radius" items={radiusOptions}></UserChoice>  
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
-                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>
-                <Entertainment stateFunction = {this.thingToPassDown} title="Options" items={entOptions}></Entertainment>                   
+                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 
             </div>
                 
         );

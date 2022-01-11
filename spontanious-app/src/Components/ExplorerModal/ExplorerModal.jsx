@@ -13,8 +13,10 @@ return (
                 <Modal isOpen={itemIsOpen}>
                     <button onClick={() => props.func()}>Refresh Location</button>
                     <div>
-                    {!props.readableAddress ? null: 
-                       <div>{`Current Location:  ${props.readableAddress}`}</div>
+                    {!props.readableAddress ? null:
+                        <> 
+                        <div>Current Location:  </div>
+                        <div>{props.readableAddress}</div></>
                     }
                        <button onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                     </div>
