@@ -8,13 +8,13 @@ function ExplorerModal (props){
   
 
 return ( 
-            <div className='RestaurantModal'>
+            <div className='ExplorerModal'>
                 <button onClick={() => setItemIsOpen(true)}>See Your Location </button> 
                 <Modal isOpen={itemIsOpen}>
                     <button onClick={() => props.func()}>Refresh Location</button>
                     <div>
                     {!props.readableAddress ? null: 
-                       <div>{props.readableAddress}</div>
+                       <div>{`Current Location:  ${props.readableAddress}`}</div>
                     }
                        <button onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                     </div>

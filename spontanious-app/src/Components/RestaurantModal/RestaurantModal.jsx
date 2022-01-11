@@ -14,7 +14,8 @@ return (
                     <button onClick={() => props.func()}>Find Another Option</button>
                     <div>
                         {!props.place_review.data ? null:
-                            <><div>{`Name:  ${props.restaurantPick.name}`}</div>
+                            <>
+                            <div>{`Name:  ${props.restaurantPick.name}`}</div>
                             <div>{`Overall Rating:  ${props.restaurantPick.rating}`}</div>
                             <div>{`Price Level:  ${props.restaurantPick.price_level}`}</div>
                             <div>{`Restaurant Address:  ${props.restaurantPick.vicinity}`}</div>

@@ -161,8 +161,6 @@ class App extends Component{
             address : [response.data.data],
             readableAddress : (response.data.results[0].formatted_address),
         })
-        debugger;
-        alert(`${response.data.results[0].formatted_address} Is your current address`)
     }
 
     nearbyRestaurant = async() =>{
@@ -209,8 +207,8 @@ class App extends Component{
                 <h1>Select a type of Spontaneous Adventure</h1>   
                 <div class="container">
                 <div class="row"></div>
-                </div><button class="button"  onClick={this.convertLocation}>Get Location</button>
-                <ExplorerModal func = {this.convertLocation}/>
+                </div>
+                <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>
                 <Entertainment stateFunction = {this.thingToPassDown} title="Options" items={entOptions}></Entertainment>                   
