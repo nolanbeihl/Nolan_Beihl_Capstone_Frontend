@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import App from '../../App';
-// import onClickOutside from 'react-onclickoutside';
-
 
 function UserChoice ({ stateFunction, title, items, multiSelect = false}) {
     const [open, setOpen] = useState(false);
@@ -11,7 +8,6 @@ function UserChoice ({ stateFunction, title, items, multiSelect = false}) {
     function handleOnClick(item) {
         if (!selection.some(current => current.id === item.id)) {
             if (!multiSelect){
-                this.state.selection = (item.value)
                 setSelection([item.value]);}
                 else if (multiSelect) {
                 setSelection([...selection, item]);
@@ -27,36 +23,36 @@ function UserChoice ({ stateFunction, title, items, multiSelect = false}) {
         }
     function choiceSelected(item) {
         if (selection.find(current => current.id === item.id)) {
-            this.state.selection = (item.value)
             stateFunction(item.value)
-            return true;
+            return item.value;
         }
         return false;
     }
     
     return(
-        <div className="entertainment-dropdown">
+        <div className="choice-dropdown">
             <div 
                 tabIndex={0}
-                className="ed-header" 
+                className="choice-header" 
                 role="button" 
                 onKeyPress={() => toggle(!open)} 
                 onClick={() => toggle(!open)}
                 >
-                <div className="ed-header_title">
-                    <p className="ed-header_title--bold">{title}</p>
+                <div className="choice-header_title">
+                    <p className="choice-header_title--bold">{title}</p>
                 </div>
-                <div className="ed-header_action">
-                    <p>{open ? 'Chose One Below' : 'Please Make a Selection'}</p>
+                <div className="choice-header_action">
+                    <p>{open ? 'Chose One Below' : 'Click Here To See The Options'}</p>
                 </div>
             </div>
             {open && (
-                <ul className="ed-list">
+                <ul className="choice-list">
                     {items.map(item => (
-                        <ul className="ed-list-item" key={item.id}>
+                        <ul className="choice-list-item" key={item.id}>
                             <button type="button" onClick={() => handleOnClick(item)}>
                                 <span>{item.value}</span>
-                                <span>{choiceSelected(item) && '         That should be fun!'}</span>
+                                <span>{choiceSelected(item.value) && '         Thank You!'}</span>
+                            
                             </button>
                         </ul>
                     ))}

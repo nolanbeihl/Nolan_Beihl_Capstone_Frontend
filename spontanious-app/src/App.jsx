@@ -14,6 +14,28 @@ import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
 
 
+
+
+
+// function funcApp() {
+//     return(
+//         <div className="container">
+//             <h1 style={{textAlign: 'center'}}>
+//                 Choose Your Next Spontaneous Adventure{' '}
+//                 <span role="img" aria-label="Entertainment Choice">
+
+//                 </span>
+//             </h1>
+//             <EntertainmentChoice title="Entertainment Types" items={entOptions} key={apiKey} lat={lat} lng={lng}/>
+//             <RestaurantChoice title="Restaurant by price level" items={priceLevel}/>
+//             <RestaurantChoice title="Restaurant type" items={foodOptions}/>
+
+                        
+//         </div>
+            
+//     );
+// }
+
 const entOptions = [
     {
         id: 1, 
@@ -52,23 +74,23 @@ const entOptions = [
 const foodOptions = [
     {
         id: 1, 
-        name: 'bar',
+        value: 'bar',
     },
     {
         id :2,
-        name: 'meal_takeaway',
+        value: 'meal_takeaway',
     },
     {
         id: 3,
-        name:'meal_delivery',
+        value:'meal_delivery',
     },
     {
         id: 4, 
-        name: 'bakery',
+        value: 'bakery',
     },
     {
         id: 5, 
-        name:'restaurant',
+        value:'restaurant',
     },
 ];
 
@@ -129,27 +151,6 @@ const radiusOptions = [
 ];
 
 
-
-// function funcApp() {
-//     return(
-//         <div className="container">
-//             <h1 style={{textAlign: 'center'}}>
-//                 Choose Your Next Spontaneous Adventure{' '}
-//                 <span role="img" aria-label="Entertainment Choice">
-
-//                 </span>
-//             </h1>
-//             <EntertainmentChoice title="Entertainment Types" items={entOptions} key={apiKey} lat={lat} lng={lng}/>
-//             <RestaurantChoice title="Restaurant by price level" items={priceLevel}/>
-//             <RestaurantChoice title="Restaurant type" items={foodOptions}/>
-
-                        
-//         </div>
-            
-//     );
-// }
-
-
 class App extends Component{
     constructor(props) {
         super(props);
@@ -168,8 +169,8 @@ class App extends Component{
             choice : 'night_club',
             rest_review : '0',
             ent_review : '0',
-            radius: '1000',
-            priceLevel: '2',
+            radius: '50000',
+            priceLevel: '',
         }
     }
 
@@ -195,7 +196,6 @@ class App extends Component{
         })
     }
   
-
     nearbyRestaurant = async() =>{
         let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
         this.setState({
@@ -218,7 +218,7 @@ class App extends Component{
             entertainments : [response.data]
         })
         var choice = [response.data.results];
-        if ((choice.opening_hours) = true && ((choice) != "lodging"))
+        if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
@@ -256,7 +256,7 @@ class App extends Component{
                 <h1>Select a type of Spontaneous Adventure</h1>   
                 <div class="container">
                 <div class="row"></div>
-                </div>
+                </div><h1>
                 <UserChoice stateFunction = {this.setPriceLevel} title="Pick Price Level" items={priceLevel}></UserChoice>
                 <UserChoice stateFunction = {this.setRestaurant} title="Pick Restaurant Type" items={foodOptions}></UserChoice>
                 <UserChoice stateFunction = {this.setEntertainment} title="Pick Entertainment Type" items={entOptions}></UserChoice>
@@ -264,6 +264,7 @@ class App extends Component{
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 
+                </h1>
             </div>
                 
         );

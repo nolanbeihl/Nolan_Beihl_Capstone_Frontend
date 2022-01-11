@@ -1,7 +1,7 @@
 
 .container{
   animation:slide 4s ease-in-out infinite alternate;
-  background-image: linear-gradient(-60deg, rgb(51, 173, 204) 50%, rgb(99, 130, 151) 50%);
+  background-image: linear-gradient(-60deg, rgb(160, 233, 252) 50%, rgb(46, 83, 107) 50%);
   bottom:0;
   left:-100%;
   opacity:.5;
@@ -16,7 +16,7 @@ code {
 }
 
 .row {
-padding: 100px;
+padding: 50px;
 border-radius: 500px;
 color: #845EC2;
 
@@ -24,13 +24,14 @@ color: #845EC2;
 
 
 h1 {
-  text-align:left;
+  text-align:center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: bolder;
+  font-size: 100px;
   color: #000000;
   padding-bottom: 100px;
-  padding-top: 100px;
-  padding-left: 10px;
+  padding-top: 10px;
+  padding-left: 50px;
 }
 
 .button {
@@ -45,6 +46,6 @@ h1 {
 ul {
   color: #000000;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  
+
 
 }
