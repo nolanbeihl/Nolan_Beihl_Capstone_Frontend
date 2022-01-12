@@ -2,11 +2,7 @@ import React , { useState } from "react";
 import axios from 'axios';
 import {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
-import Entertainment from "./Components/UserChoice/UserChoice";
 import Explorer from './Components/Explorer/Explorer';
-import RestaurantChoice from "./Components/Restaurant/Restaurant";
 import './index.css';
 import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentModal";
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
@@ -257,10 +253,7 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div><h1>
-                <UserChoice />
-                {/* <UserChoice stateFunction = {this.setRestaurant} title="Pick Restaurant Type" items={foodOptions}></UserChoice>
-                <UserChoice stateFunction = {this.setEntertainment} title="Pick Entertainment Type" items={entOptions}></UserChoice>
-                <UserChoice stateFunction = {this.setLocation} title="Set Radius" items={radiusOptions}></UserChoice>   */}
+                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyRestaurant} options = {[entOptions]}/>
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 

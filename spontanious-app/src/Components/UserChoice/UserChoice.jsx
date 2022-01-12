@@ -1,14 +1,11 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+
 
 class UserChoice extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value : "1",
-            restaurants : [],
-            restaurantPick : [],
-
+            value : "",
         }; 
 
         this.handleChange = this.handleChange.bind(this);
@@ -19,42 +16,31 @@ class UserChoice extends React.Component {
         this.setState({value: event.target.value});
     }
 
-    handleSubmit = async(event)=>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&price_level=${this.state.value}&type=restaurant&key=${this.state.anotherKey}`)
-        this.setState({
-            restaurants : [response.data]
-        })
-        var choice = [response.data.results];
-        if ((choice.opening_hours) = true)
-            var randomchoice = choice[Math.floor(Math.random()*choice.length)];
-            var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-            var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            this.setState({
-                restaruantPick : anotherchoice,
-                rest_review : place_review
-            })
+    handleSubmit(event){
+        // this.props.nearbyRestaurant();
+        alert('You have chosen the following: ' + this.state.value);
         event.preventDfault();
-        
     }
 
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <label>
-                    Pick the price level:
-                    <select value={this.state.value} onChange={this.handleChange}>
-                        <option value="0">$</option>
-                        <option value="1">$$</option>
-                        <option value="2">$$$</option>
-                        <option value="3">$$$$</option>
-                        <option value="4">$$$$$</option>
-                    </select>
+                <label className="choice-list">
+                    {this.props.options.map(item => (
+                        <label className="choice-list-item"> 
+                        <select value={(this.props.options.value)} onChange={this.handleChange} key={this.props.options.id}>
+                            <option value={this.props.options.value}>{this.props.options.value}</option>
+                        </select>
+                        </label>
+                    ))}
                 </label>
                 <input type="submit" value="Submit"/>
             </form>
+            
         );
         }
 }
+
 export default UserChoice;
 
 
