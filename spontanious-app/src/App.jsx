@@ -257,10 +257,10 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div><h1>
-                <UserChoice stateFunction = {this.setPriceLevel} title="Pick Price Level" items={priceLevel}></UserChoice>
-                <UserChoice stateFunction = {this.setRestaurant} title="Pick Restaurant Type" items={foodOptions}></UserChoice>
+                <UserChoice />
+                {/* <UserChoice stateFunction = {this.setRestaurant} title="Pick Restaurant Type" items={foodOptions}></UserChoice>
                 <UserChoice stateFunction = {this.setEntertainment} title="Pick Entertainment Type" items={entOptions}></UserChoice>
-                <UserChoice stateFunction = {this.setLocation} title="Set Radius" items={radiusOptions}></UserChoice>  
+                <UserChoice stateFunction = {this.setLocation} title="Set Radius" items={radiusOptions}></UserChoice>   */}
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 
