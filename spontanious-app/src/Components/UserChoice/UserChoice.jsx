@@ -26,13 +26,11 @@ class UserChoice extends React.Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 <label className="choice-list">
-                    {this.props.options.map(item => (
-                        <label className="choice-list-item"> 
-                        <select value={(this.props.options.value)} onChange={this.handleChange} key={this.props.options.id}>
-                            <option value={this.props.options.value}>{this.props.options.value}</option>
-                        </select>
-                        </label>
+                <select value={(this.state.value)} onChange={this.handleChange}  >
+                    {this.props.options.map(item =>  (
+                        <option key={item.id} value={item.value}>{item.value}</option>    
                     ))}
+                </select> 
                 </label>
                 <input type="submit" value="Submit"/>
             </form>

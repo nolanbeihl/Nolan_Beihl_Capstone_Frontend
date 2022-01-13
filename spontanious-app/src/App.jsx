@@ -253,7 +253,9 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div><h1>
-                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyRestaurant} options = {[entOptions]}/>
+                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyEntertainment} options = {entOptions}/>
+                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyEntertainment} options = {radiusOptions}/>
+                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyEntertainment} options = {priceLevel}/>
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 
