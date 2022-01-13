@@ -16,10 +16,10 @@ class UserChoice extends React.Component {
         this.setState({value: event.target.value});
     }
 
-    handleSubmit(event){
-        // this.props.nearbyRestaurant();
+    handleSubmit () {
+        this.props.setOption(this.state.value);
         alert('You have chosen the following: ' + this.state.value);
-        event.preventDfault();
+        // event.preventDafault();
     }
 
     render(){

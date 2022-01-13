@@ -67,7 +67,7 @@ const entOptions = [
     }
 ];
 
-const foodOptions = [
+const restOptions = [
     {
         id: 1, 
         value: 'bar',
@@ -157,12 +157,10 @@ class App extends Component{
             lng: -77.0369,
             anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
             readableAddress : '0',
-            restaruantPick : [],
-            entertainmentPick : [],
+            restaruantPick : '',
+            entertainmentPick : '',
             distance : 0,
-            options : ['amusement_park','bowling_alley','museum','night_club','aquarium,casino','tourist_attraction','zoo'],
             optionPicked : '0',
-            choice : 'night_club',
             rest_review : '0',
             ent_review : '0',
             radius: '50000',
@@ -209,7 +207,7 @@ class App extends Component{
     }
     
     nearbyEntertainment = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.choice}&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&key=${this.state.anotherKey}`)
         this.setState({
             entertainments : [response.data]
         })
@@ -222,30 +220,39 @@ class App extends Component{
                 entertainmentPick : anotherchoice,
                 ent_review : place_review
             })
+        
     }
 
-    setEntertainment = async(setEntertainment)=>{
-        this.setState({
-            entertainmentpick : setEntertainment
+    setEntertainment = async(setOption)=>{
+        this.props.setState({
+            entertainmentpick : (setOption)
         })
+        alert(this.state.entertainmentPick)   
     }
     
-    setLocation = async(setRadius) => {
+    setLocation = async(setOption) => {
         this.setState({
-            radius : setRadius
+            radius : setOption
         })
     }
-    setRestaurant = async(setRestaurant) => {
+    setRestaurant = async(setOption) => {
         this.setState({
-            restaurantPick : setRestaurant
+            restaurantPick : setOption
         })
     }
-    setPriceLevel = async(setPrice) => {
+    setPriceLevel = async(setOption) => {
         this.setState({
-            priceLevel : setPrice
+            priceLevel : setOption
         })
     }
   
+    setRadius = async(setOption) => {
+        this.setState({
+            radius : setOption
+        })
+        
+        alert(this.state.radius);
+    }
     render() {
         return(
             <div className='container'>
@@ -253,9 +260,11 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div><h1>
-                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyEntertainment} options = {entOptions}/>
-                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyEntertainment} options = {radiusOptions}/>
-                <UserChoice func = {this.nearbyEntertainment} nearbyRestaurant={this.nearbyEntertainment} options = {priceLevel}/>
+                <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+                <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
+                <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
+                <UserChoice options = {restOptions} setOption={this.setRestaurant}/>
+
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 
