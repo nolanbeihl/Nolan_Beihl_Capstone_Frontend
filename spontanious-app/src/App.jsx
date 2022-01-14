@@ -8,29 +8,8 @@ import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentMod
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
+import { Alert } from "bootstrap";
 
-
-
-
-
-// function funcApp() {
-//     return(
-//         <div className="container">
-//             <h1 style={{textAlign: 'center'}}>
-//                 Choose Your Next Spontaneous Adventure{' '}
-//                 <span role="img" aria-label="Entertainment Choice">
-
-//                 </span>
-//             </h1>
-//             <EntertainmentChoice title="Entertainment Types" items={entOptions} key={apiKey} lat={lat} lng={lng}/>
-//             <RestaurantChoice title="Restaurant by price level" items={priceLevel}/>
-//             <RestaurantChoice title="Restaurant type" items={foodOptions}/>
-
-                        
-//         </div>
-            
-//     );
-// }
 
 const entOptions = [
     {
@@ -67,28 +46,28 @@ const entOptions = [
     }
 ];
 
-const restOptions = [
-    {
-        id: 1, 
-        value: 'bar',
-    },
-    {
-        id :2,
-        value: 'meal_takeaway',
-    },
-    {
-        id: 3,
-        value:'meal_delivery',
-    },
-    {
-        id: 4, 
-        value: 'bakery',
-    },
-    {
-        id: 5, 
-        value:'restaurant',
-    },
-];
+// const restOptions = [
+//     {
+//         id: 1, 
+//         value: 'bar',
+//     },
+//     {
+//         id :2,
+//         value: 'meal_takeaway',
+//     },
+//     {
+//         id: 3,
+//         value:'meal_delivery',
+//     },
+//     {
+//         id: 4, 
+//         value: 'bakery',
+//     },
+//     {
+//         id: 5, 
+//         value:'restaurant',
+//     },
+// ];
 
 const priceLevel = [
     {
@@ -159,19 +138,16 @@ class App extends Component{
             readableAddress : '0',
             restaruantPick : '',
             entertainmentPick : '',
-            distance : 0,
             optionPicked : '0',
             rest_review : '0',
             ent_review : '0',
-            radius: '50000',
+            radius: '',
             priceLevel: '',
         }
     }
 
     componentDidMount(){
-        // this.explorerLocation()
-        // this.convertLocation()
-        // this.nearbyRestaurant()
+        
     }
 
     explorerLocation = async() =>{ 
@@ -191,7 +167,7 @@ class App extends Component{
     }
   
     nearbyRestaurant = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&price_level=${this.state.priceLevel}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
         this.setState({
             restaurants : [response.data]
         })
@@ -224,10 +200,9 @@ class App extends Component{
     }
 
     setEntertainment = async(setOption)=>{
-        this.props.setState({
+        this.setState({
             entertainmentpick : (setOption)
-        })
-        alert(this.state.entertainmentPick)   
+        })   
     }
     
     setLocation = async(setOption) => {
@@ -235,11 +210,12 @@ class App extends Component{
             radius : setOption
         })
     }
-    setRestaurant = async(setOption) => {
-        this.setState({
-            restaurantPick : setOption
-        })
-    }
+
+    // setRestaurant = async(setOption) => {
+    //     this.setState({
+    //         restaurantPick : setOption
+    //     })
+    // }
     setPriceLevel = async(setOption) => {
         this.setState({
             priceLevel : setOption
@@ -250,9 +226,8 @@ class App extends Component{
         this.setState({
             radius : setOption
         })
-        
-        alert(this.state.radius);
     }
+
     render() {
         return(
             <div className='container'>
@@ -260,15 +235,25 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div><h1>
+                    Leave options alone and click on Entertainment or Restaurant for a Random Selection
+                    Or you can filter the results with the following fields:
+                    <br/>
+                    Set the distance From You in Meters
                 <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+                    Set what type of Entertainment you would like
                 <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
+                    Set the Max Price level you would like
                 <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
-                <UserChoice options = {restOptions} setOption={this.setRestaurant}/>
-
+                {/* <UserChoice options = {restOptions} setOption={this.setRestaurant}/> */}
+                    See your current location
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
+
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
-                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>                 
+                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>
                 </h1>
+                {console.log(this.state.radius)}
+                {console.log(this.state.entertainmentPick)}
+                {console.log(this.state.priceLevel)}
             </div>
                 
         );
