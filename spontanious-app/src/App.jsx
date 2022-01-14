@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React , { useState , useEffect} from "react";
 import axios from 'axios';
 import {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,10 @@ import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
 import { Alert } from "bootstrap";
+
+
+
+
 
 
 const entOptions = [
@@ -72,27 +76,27 @@ const entOptions = [
 const priceLevel = [
     {
         id: 1, 
-        value: '0',
+        value: 0,
         name: 'Cheap',
     },
     {
         id :2,
-        value: '1',
+        value: 1,
         name: 'Not very much',
     },
     {
         id: 3,
-        value:'2',
+        value: 2,
         name: 'Moderate',
     },
     {
         id: 4, 
-        value: '3',
+        value: 3,
         name: 'A little high',
     },
     {
         id: 5, 
-        value:'4',
+        value: 4,
         name: 'Are You Have Enough?',
     },
 ];
@@ -136,18 +140,23 @@ class App extends Component{
             lng: -77.0369,
             anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
             readableAddress : '0',
-            restaruantPick : '',
             entertainmentPick : '',
+            distance : 0,
             optionPicked : '0',
             rest_review : '0',
             ent_review : '0',
-            radius: '',
-            priceLevel: '',
+            radius: '50000',
+            priceLevel: 5,
+            choice : [],
+            choiceLat : 0,
+            choiceLng : 0,
         }
     }
 
     componentDidMount(){
-        
+        // this.explorerLocation()
+        // this.convertLocation()
+        // this.nearbyRestaurant()
     }
 
     explorerLocation = async() =>{ 
@@ -165,9 +174,24 @@ class App extends Component{
             readableAddress : (response.data.results[0].formatted_address),
         })
     }
-  
+
+    getDistance = async() =>{
+       let latitudeFrom = this.state.lat;
+       let longitudeFrom = this.state.lng;
+       let latitudeTo = this.state.choiceLat;
+       let longitudeTo = this.state.choiceLng;
+        theta = longitudeFrom - longitudeTo;
+        dist = sin(deg2rad(latitudeFrom)) * sin(deg2rad(latitudeTo)) + cos(deg2rad(latitudeFrom)) * cos(deg2rad(latitudeTo)) * cos(deg2rad(theta));
+        dist = letacos(dist);
+        dist = letrad2deg(dist);
+        miles = dist * 60 * 1.1515;
+        this.setState({
+            distance : miles,
+        })
+    }
+
     nearbyRestaurant = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&price_level=${this.state.priceLevel}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
         this.setState({
             restaurants : [response.data]
         })
@@ -176,10 +200,16 @@ class App extends Component{
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            this.setState({
-                restaruantPick : anotherchoice,
-                rest_review : place_review
-            })
+            
+            if (anotherchoice.price_level === this.state.priceLevel);
+                this.setState({
+                    restaruantPick : anotherchoice,
+                    rest_review : place_review,
+                    choiceLat : anotherchoice.geometry.location.lat,
+                    choiceLng : anotherchoice.geometry.location.lng,
+            });
+            
+            
     }
     
     nearbyEntertainment = async() =>{
@@ -200,9 +230,10 @@ class App extends Component{
     }
 
     setEntertainment = async(setOption)=>{
-        this.setState({
+        this.props.setState({
             entertainmentpick : (setOption)
-        })   
+        })
+        alert(this.state.entertainmentPick)   
     }
     
     setLocation = async(setOption) => {
@@ -210,7 +241,6 @@ class App extends Component{
             radius : setOption
         })
     }
-
     // setRestaurant = async(setOption) => {
     //     this.setState({
     //         restaurantPick : setOption
@@ -226,8 +256,8 @@ class App extends Component{
         this.setState({
             radius : setOption
         })
+        
     }
-
     render() {
         return(
             <div className='container'>
@@ -235,25 +265,29 @@ class App extends Component{
                 <div class="container">
                 <div class="row"></div>
                 </div><h1>
-                    Leave options alone and click on Entertainment or Restaurant for a Random Selection
-                    Or you can filter the results with the following fields:
+                    Choose to filter with the below options
                     <br/>
-                    Set the distance From You in Meters
+                    If you want a completely random option just click on Entertainment or Restaurant
+                    <br/>
+                    Set distance from you in Meters
                 <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
-                    Set what type of Entertainment you would like
+                    <br/>
+                    Options in type of Entertainment
                 <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
-                    Set the Max Price level you would like
+                    <br/>
+                    Set Max Price Level
                 <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
-                {/* <UserChoice options = {restOptions} setOption={this.setRestaurant}/> */}
-                    See your current location
+                    <br/>
+                    See Your Current Location
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
-
+                    <br/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
-                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review}/>
+                    <br/>
+                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.getDistance}/>
                 </h1>
                 {console.log(this.state.radius)}
-                {console.log(this.state.entertainmentPick)}
                 {console.log(this.state.priceLevel)}
+                {console.log(this.state.entertainmentPick)}
             </div>
                 
         );

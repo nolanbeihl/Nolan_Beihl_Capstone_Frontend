@@ -6,7 +6,6 @@ import UserChoice from '../UserChoice/UserChoice';
 
 function EntertainmentModal (props){
     const [itemIsOpen, setItemIsOpen] = useState(false)
-    const [selection, setSelection] = useState([]);
 
 
 
@@ -38,7 +37,7 @@ return (
                             <div>{props.place_review.data.result.reviews[3].text}</div></>
                         }
                         <button onClick={() => setItemIsOpen(false)}>Back To Menu</button>
-                        <button onClick={() => setSelection(props.entertainmentPick)}>Save Location</button>          
+                                 
                     </div>
                 </Modal>
             </div>
