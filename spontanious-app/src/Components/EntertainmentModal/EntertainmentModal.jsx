@@ -13,9 +13,9 @@ function EntertainmentModal (props){
 
 return ( 
             <div className='EntertainmentModal'>
-                <button onClick={() => setItemIsOpen(true)}>Entertainment </button> 
+                <button class="button" onClick={() => setItemIsOpen(true)}>Entertainment </button> 
                 <Modal isOpen={itemIsOpen}>
-                    <button onClick={() => props.func()}>Find New Option</button>
+                    <button class="button" onClick={() => props.func()}>Find New Option</button>
                     <div>
                         {!props.place_review.data ? null:
                             <><div>{`Name:  ${props.entertainmentPick.name}`}</div>
@@ -36,7 +36,7 @@ return (
                             <div>{props.place_review.data.result.reviews[3].author_name}  Rated It:  {props.place_review.data.result.reviews[3].rating}</div>
                             <div>{props.place_review.data.result.reviews[3].text}</div></>
                         }
-                        <button onClick={() => setItemIsOpen(false)}>Back To Menu</button>
+                        <button class="button" class="button" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                                  
                     </div>
                 </Modal>

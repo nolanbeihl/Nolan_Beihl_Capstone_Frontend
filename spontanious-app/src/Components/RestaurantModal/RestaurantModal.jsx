@@ -8,9 +8,9 @@ function RestaurantModal (props){
 
 return ( 
             <div className='RestaurantModal'>
-                <button onClick={() => setItemIsOpen(true)}>Restaurant </button> 
+                <button class="buttonon" Click={() => setItemIsOpen(true)}>Restaurant </button> 
                 <Modal isOpen={itemIsOpen}>
-                    <button onClick={() => props.func()}>Find Another Option</button>
+                    <button class="buttonon" Click={() => props.func()}>Find Another Option</button>
                     <div>
                         {!props.place_review.data ? null:
                             <>
@@ -32,7 +32,7 @@ return (
                             <div>{props.place_review.data.result.reviews[3].author_name}  Rated It:  {props.place_review.data.result.reviews[3].rating}</div>
                             <div>{props.place_review.data.result.reviews[3].text}</div></>
                         }
-                        <button onClick={() => setItemIsOpen(false)}>Back To Menu</button>
+                        <button class="button" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                     </div>
                 </Modal>
             </div>

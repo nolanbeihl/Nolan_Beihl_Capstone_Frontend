@@ -9,16 +9,16 @@ function ExplorerModal (props){
 
 return ( 
             <div className='ExplorerModal'>
-                <button onClick={() => setItemIsOpen(true)}>See Your Location </button> 
+                <button class="button" onClick={() => setItemIsOpen(true)}>See Your Location </button> 
                 <Modal isOpen={itemIsOpen}>
-                    <button onClick={() => props.func()}>Refresh Location</button>
+                    <button class="button" onClick={() => props.func()}>Refresh Location</button>
                     <div>
                     {!props.readableAddress ? null:
                         <> 
                         <div>Current Location:  </div>
                         <div>{props.readableAddress}</div></>
                     }
-                       <button onClick={() => setItemIsOpen(false)}>Back To Menu</button>
+                       <button class="button" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                     </div>
                 </Modal>
             </div>
