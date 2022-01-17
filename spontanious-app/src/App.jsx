@@ -209,11 +209,12 @@ class App extends Component{
         
     }
    
-    setEntertainment = async(setOption)=>{
+    setEntertainment = (setOption)=>{
         this.setState({
-            entertainmentpick : setOption
-        })
-        alert(this.state.entertainmentPick)   
+            entertainmentPick : setOption,
+        }  
+        )
+        console.log('in setEnt', this.state.entertainmentPick)
     }
     
     setLocation = async(setOption) => {
@@ -229,7 +230,7 @@ class App extends Component{
     }
   
     setRadius = async(setOption) => {
-        var convert = setOption * 1609.344;
+        // var convert = setOption * 1609.344;
         if (setOption === 1)
             this.setState({
                 radius : 1609,
