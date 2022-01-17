@@ -149,7 +149,7 @@ class App extends Component{
     }
 
     componentDidMount(){
-        this.explorerLocation()
+        // this.explorerLocation()
         // this.convertLocation()
         // this.nearbyRestaurant()
         // this.getDistance()
@@ -210,8 +210,8 @@ class App extends Component{
     }
    
     setEntertainment = async(setOption)=>{
-        this.props.setState({
-            entertainmentpick : (setOption)
+        this.setState({
+            entertainmentpick : setOption
         })
         alert(this.state.entertainmentPick)   
     }
@@ -230,9 +230,29 @@ class App extends Component{
   
     setRadius = async(setOption) => {
         var convert = setOption * 1609.344;
-        this.setState({
-            radius : convert,
+        if (setOption === 1)
+            this.setState({
+                radius : 1609,
+            })
+        if (setOption === 2)
+            this.setState({
+                radius : 3218,
+            })
+        if (setOption === 3)
+            this.setState({
+                radius : 4828
+            })    
+        if (setOption === 4)
+            this.setState({
+                radius : 6437
+            })
+        if (setOption === 5)
+            this.setState({
+                radius : 8046
         })
+        // this.setState({
+        //     radius : convert,
+        // })
     }
 
     render() {
