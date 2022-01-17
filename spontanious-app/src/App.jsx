@@ -8,11 +8,6 @@ import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentMod
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
-import { Alert } from "bootstrap";
-
-
-
-
 
 
 const entOptions = [
@@ -129,7 +124,6 @@ const radiusOptions = [
     },
 ];
 
-
 class App extends Component{
     constructor(props) {
         super(props);
@@ -150,6 +144,7 @@ class App extends Component{
             choice : [],
             choiceLat : 0,
             choiceLng : 0,
+            distance : 0,
         }
     }
 
@@ -157,6 +152,7 @@ class App extends Component{
         // this.explorerLocation()
         // this.convertLocation()
         // this.nearbyRestaurant()
+        // this.getDistance()
     }
 
     explorerLocation = async() =>{ 
@@ -172,21 +168,6 @@ class App extends Component{
         this.setState({
             address : [response.data.data],
             readableAddress : (response.data.results[0].formatted_address),
-        })
-    }
-
-    getDistance = async() =>{
-       let latitudeFrom = this.state.lat;
-       let longitudeFrom = this.state.lng;
-       let latitudeTo = this.state.choiceLat;
-       let longitudeTo = this.state.choiceLng;
-        theta = longitudeFrom - longitudeTo;
-        dist = sin(deg2rad(latitudeFrom)) * sin(deg2rad(latitudeTo)) + cos(deg2rad(latitudeFrom)) * cos(deg2rad(latitudeTo)) * cos(deg2rad(theta));
-        dist = letacos(dist);
-        dist = letrad2deg(dist);
-        miles = dist * 60 * 1.1515;
-        this.setState({
-            distance : miles,
         })
     }
 
@@ -208,8 +189,13 @@ class App extends Component{
                     choiceLat : anotherchoice.geometry.location.lat,
                     choiceLng : anotherchoice.geometry.location.lng,
             });
-            
-            
+    }
+
+    getDistance = async() => {
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.state.lat}%2C${this.state.lng}&destinations=${this.state.choiceLat}%2C${this.state.choiceLng}&key=${this.state.anotherKey}`)
+        this.setState({
+            distance : response,
+        }) 
     }
     
     nearbyEntertainment = async() =>{
@@ -228,7 +214,7 @@ class App extends Component{
             })
         
     }
-
+   
     setEntertainment = async(setOption)=>{
         this.props.setState({
             entertainmentpick : (setOption)
@@ -241,11 +227,7 @@ class App extends Component{
             radius : setOption
         })
     }
-    // setRestaurant = async(setOption) => {
-    //     this.setState({
-    //         restaurantPick : setOption
-    //     })
-    // }
+
     setPriceLevel = async(setOption) => {
         this.setState({
             priceLevel : setOption
@@ -256,8 +238,8 @@ class App extends Component{
         this.setState({
             radius : setOption
         })
-        
     }
+
     render() {
         return(
             <div className='container'>
@@ -283,7 +265,7 @@ class App extends Component{
                     <br/>
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
                     <br/>
-                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.getDistance}/>
+                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                 </h1>
                 {console.log(this.state.radius)}
                 {console.log(this.state.priceLevel)}
@@ -291,7 +273,6 @@ class App extends Component{
             </div>
                 
         );
-
 }}
 
 export default App;
