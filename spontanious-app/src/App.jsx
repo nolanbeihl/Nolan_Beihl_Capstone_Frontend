@@ -99,27 +99,27 @@ const priceLevel = [
 const radiusOptions = [
     {
         id: 1, 
-        value: '1000',
+        value: '1',
         name: 'Close',
     },
     {
         id :2,
-        value: '5000',
+        value: '2',
         name: 'Not Too Far',
     },
     {
         id: 3,
-        value:'10000',
+        value:'3',
         name: 'Probably Need A ride',
     },
     {
         id: 4, 
-        value: '20000',
+        value: '4',
         name: 'I Would Drive',
     },
     {
         id: 5, 
-        value:'50000',
+        value:'5',
         name: 'Definitely Driving',
     },
 ];
@@ -144,12 +144,12 @@ class App extends Component{
             choice : [],
             choiceLat : 0,
             choiceLng : 0,
-            distance : 0,
+            distance : '',
         }
     }
 
     componentDidMount(){
-        // this.explorerLocation()
+        this.explorerLocation()
         // this.convertLocation()
         // this.nearbyRestaurant()
         // this.getDistance()
@@ -181,21 +181,13 @@ class App extends Component{
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            
+            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
             if (anotherchoice.price_level === this.state.priceLevel);
                 this.setState({
                     restaruantPick : anotherchoice,
                     rest_review : place_review,
-                    choiceLat : anotherchoice.geometry.location.lat,
-                    choiceLng : anotherchoice.geometry.location.lng,
+                    distance : distanceTo.data.rows[0].elements[0].distance.text,
             });
-    }
-
-    getDistance = async() => {
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.state.lat}%2C${this.state.lng}&destinations=${this.state.choiceLat}%2C${this.state.choiceLng}&key=${this.state.anotherKey}`)
-        this.setState({
-            distance : response,
-        }) 
     }
     
     nearbyEntertainment = async() =>{
@@ -208,9 +200,11 @@ class App extends Component{
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
+            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
             this.setState({
                 entertainmentPick : anotherchoice,
-                ent_review : place_review
+                ent_review : place_review,
+                distance : distanceTo.data.rows[0].elements[0].distance.text,
             })
         
     }
@@ -235,8 +229,9 @@ class App extends Component{
     }
   
     setRadius = async(setOption) => {
+        var convert = setOption * 1609.344;
         this.setState({
-            radius : setOption
+            radius : convert,
         })
     }
 
@@ -251,7 +246,7 @@ class App extends Component{
                     <br/>
                     If you want a completely random option just click on Entertainment or Restaurant
                     <br/>
-                    Set distance from you in Meters
+                    Set distance from you in Miles
                 <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
                     <br/>
                     Options in type of Entertainment
@@ -263,7 +258,7 @@ class App extends Component{
                     See Your Current Location
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                     <br/>
-                <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review}/> 
+                <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
                     <br/>
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                 </h1>

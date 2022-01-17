@@ -22,7 +22,7 @@ return (
                             <div>{`Overall Rating:  ${props.entertainmentPick.rating}`}</div>
                             <div>{`Price Level:  ${props.entertainmentPick.price_level}`}</div>
                             <div>{`Entertainment Address:  ${props.entertainmentPick.vicinity}`}</div>
-                            <div>{`Distance to Location: ${props.entertainmentPick}`}</div>
+                            <div>{`Distance to Location: ${props.distance}`}</div>
                             <div>{`Reviews: `}</div>
                             <div>{props.place_review.data.result.reviews[0].author_name}   Rated It:  {props.place_review.data.result.reviews[0].rating}</div>
                             <div>{props.place_review.data.result.reviews[0].text}</div>
