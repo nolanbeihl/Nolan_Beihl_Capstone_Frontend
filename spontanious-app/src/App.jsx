@@ -224,34 +224,42 @@ class App extends Component{
 
     render() {
         return(
-            <div className='container'>
-                <h1>Select a type of Spontaneous Adventure</h1>   
-                <div class="container">
-                <div class="row"></div>
-                </div><h1>
-                    Choose to filter with the below options
-                
-                    If you want a completely random option just click on Entertainment or Restaurant
-                
-                    Set distance from you in Miles
-                <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
-                
-                    Options in type of Entertainment
-                <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
-                
-                    Set Max Price Level
-                <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
-                
-                    See Your Current Location
-                <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
-                
-                <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
-                
-                <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
-                </h1>
-              
-            </div>
-                
+            
+                <div className='container'>
+                    
+                    <h1>Select a type of Spontaneous Adventure</h1>   
+                    <div class="container">
+                    <div class="row"></div>
+                    </div><h1>
+                        Choose to filter with the below options
+                    
+                        If you want a completely random option just click on Entertainment or Restaurant
+                    <div className='dist'>
+                        Set distance from you in Miles
+                    <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+                    </div>
+                    <div className='entOption'>
+                        Options in type of Entertainment
+                    <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
+                    </div>
+                    <div className='priceOption'>
+                        Set Max Price Level
+                    <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
+                    </div>
+                    <div className='location'>
+                        See Your Current Location
+                    <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
+                    </div>
+                    <div className='ent'>
+                    <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
+                    </div>
+                    <div className='rest'>
+                    <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
+                    </div>
+                    </h1>
+                 </div>
+               
+            
         );
 }}
 
