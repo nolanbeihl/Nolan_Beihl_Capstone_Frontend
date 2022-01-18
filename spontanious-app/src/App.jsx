@@ -1,4 +1,4 @@
-import React , { useState , useEffect} from "react";
+import React from "react";
 import axios from 'axios';
 import {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -44,29 +44,6 @@ const entOptions = [
         value: 'zoo',
     }
 ];
-
-// const restOptions = [
-//     {
-//         id: 1, 
-//         value: 'bar',
-//     },
-//     {
-//         id :2,
-//         value: 'meal_takeaway',
-//     },
-//     {
-//         id: 3,
-//         value:'meal_delivery',
-//     },
-//     {
-//         id: 4, 
-//         value: 'bakery',
-//     },
-//     {
-//         id: 5, 
-//         value:'restaurant',
-//     },
-// ];
 
 const priceLevel = [
     {
@@ -148,13 +125,6 @@ class App extends Component{
         }
     }
 
-    componentDidMount(){
-        // this.explorerLocation()
-        // this.convertLocation()
-        // this.nearbyRestaurant()
-        // this.getDistance()
-    }
-
     explorerLocation = async() =>{ 
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
         this.setState({
@@ -230,7 +200,6 @@ class App extends Component{
     }
   
     setRadius = async(setOption) => {
-        // var convert = setOption * 1609.344;
         if (setOption === 1)
             this.setState({
                 radius : 1609,
@@ -251,9 +220,6 @@ class App extends Component{
             this.setState({
                 radius : 8046
         })
-        // this.setState({
-        //     radius : convert,
-        // })
     }
 
     render() {

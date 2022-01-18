@@ -1,7 +1,5 @@
 import React , { useState } from 'react';
 import Modal from 'react-modal';
-import App from '../../App';
-
 
 function RestaurantModal (props){
     const [itemIsOpen, setItemIsOpen] = useState(false)

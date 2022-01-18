@@ -1,15 +1,8 @@
 import React , { useState } from 'react';
 import Modal from 'react-modal';
-import App from '../../App';
-import UserChoice from '../UserChoice/UserChoice';
-
 
 function EntertainmentModal (props){
     const [itemIsOpen, setItemIsOpen] = useState(false)
-
-
-
-  
 
 return ( 
             <div className='EntertainmentModal'>
