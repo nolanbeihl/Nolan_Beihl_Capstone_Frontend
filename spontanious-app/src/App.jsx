@@ -124,7 +124,9 @@ class App extends Component{
             distance : '',
         }
     }
-
+    componentDidMount(){
+        this.convertLocation()
+    }
     explorerLocation = async() =>{ 
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
         this.setState({
@@ -182,9 +184,7 @@ class App extends Component{
     setEntertainment = (setOption)=>{
         this.setState({
             entertainmentPick : setOption,
-        }  
-        )
-        console.log('in setEnt', this.state.entertainmentPick)
+        })  
     }
     
     setLocation = async(setOption) => {

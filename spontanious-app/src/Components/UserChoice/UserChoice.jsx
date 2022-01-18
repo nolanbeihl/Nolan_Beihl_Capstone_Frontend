@@ -19,7 +19,7 @@ class UserChoice extends React.Component {
     handleSubmit (event) {
         event.preventDefault(); 
         this.props.setOption(this.state.value);
-        alert('You have chosen the following: ' + this.state.value);
+        
         
     }
 

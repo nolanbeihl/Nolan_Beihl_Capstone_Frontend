@@ -39,7 +39,12 @@ h1 {
   background-color: aquamarine;
  
 }
-
+div{
+  text-align: center;
+  background-color: rgb(110, 236, 236);
+  text-shadow: floralwhite;
+  padding: 0px;
+}
 .button {
   background-color: #36c349;
   font: bolder;
@@ -47,6 +52,8 @@ h1 {
   font-style: italic;
   border-radius: 0vmin;
   align-items: baseline;
+  border-radius: 16px;
+  cursor: hand;
 }
 
 ul {
