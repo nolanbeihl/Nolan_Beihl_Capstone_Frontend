@@ -264,28 +264,26 @@ class App extends Component{
                 <div class="row"></div>
                 </div><h1>
                     Choose to filter with the below options
-                    <br/>
+                
                     If you want a completely random option just click on Entertainment or Restaurant
-                    <br/>
+                
                     Set distance from you in Miles
                 <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
-                    <br/>
+                
                     Options in type of Entertainment
                 <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
-                    <br/>
+                
                     Set Max Price Level
                 <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
-                    <br/>
+                
                     See Your Current Location
                 <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
-                    <br/>
+                
                 <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
-                    <br/>
+                
                 <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                 </h1>
-                {console.log(this.state.radius)}
-                {console.log(this.state.priceLevel)}
-                {console.log(this.state.entertainmentPick)}
+              
             </div>
                 
         );

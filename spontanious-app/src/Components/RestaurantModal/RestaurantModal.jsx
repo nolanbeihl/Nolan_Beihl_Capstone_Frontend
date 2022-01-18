@@ -8,9 +8,9 @@ function RestaurantModal (props){
 
 return ( 
             <div className='RestaurantModal'>
-                <button class="buttonon" Click={() => setItemIsOpen(true)}>Restaurant </button> 
+                <button class="button" onClick={() => setItemIsOpen(true)}>Restaurant </button> 
                 <Modal isOpen={itemIsOpen}>
-                    <button class="buttonon" Click={() => props.func()}>Find Another Option</button>
+                    <button class="button" onClick={() => props.func()}>Find Another Option</button>
                     <div>
                         {!props.place_review.data ? null:
                             <>
