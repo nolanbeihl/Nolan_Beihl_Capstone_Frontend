@@ -110,5 +110,14 @@ ul {
   background-image:url(./DC_National_Mall_Map.png); 
   text-align: center;
   text-size-adjust: 20px;
-  
+
+}
+.main-text{
+  font-weight: bolder;
+  font: bolder;
+}
+.RestaurantModal{
+ background-image: url(./DC_National_Mall_Map.png);
+ max-height: calc(100% - 80px);
+ max-width: calc(100% - 80px);
 }

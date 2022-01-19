@@ -100,6 +100,16 @@ const radiusOptions = [
         name: 'Definitely Driving',
     },
 ];
+const open =[
+    {
+        id: 1,
+        value: 'Open',
+    },
+    {
+        id: 2,
+        value: 'Closed',
+    },
+];
 
 class App extends Component{
     constructor(props) {
@@ -122,6 +132,7 @@ class App extends Component{
             choiceLat : 0,
             choiceLng : 0,
             distance : '',
+            openOrClosed: true,
         }
     }
     componentDidMount(){
@@ -200,28 +211,34 @@ class App extends Component{
     }
   
     setRadius = async(setOption) => {
-        if (setOption === 1)
+        if (setOption == 1)
             this.setState({
                 radius : 1609,
             })
-        if (setOption === 2)
+        if (setOption == 2)
             this.setState({
                 radius : 3218,
             })
-        if (setOption === 3)
+        if (setOption == 3)
             this.setState({
                 radius : 4828
             })    
-        if (setOption === 4)
+        if (setOption == 4)
             this.setState({
                 radius : 6437
             })
-        if (setOption === 5)
+        if (setOption == 5)
             this.setState({
                 radius : 8046
         })
     }
 
+    setStatus = async(setOption)=> {
+        if (setOption === "Closed");
+            this.setState({
+                openOrClosed : false
+        })
+    }
     render() {
         return(
             <div className="App">    
@@ -249,6 +266,12 @@ class App extends Component{
                     <div  class="col-md-3" className="price">
                         Set Max Price Level
                     <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
+                    </div>
+                    </div>
+                    <div className="row">
+                    <div  class="col-md-3" className="price">
+                        Option to Filter by Open/Closed
+                    <UserChoice options = {open} setOption={this.setStatus}/>
                     </div>
                     </div>
                     <div className="row">

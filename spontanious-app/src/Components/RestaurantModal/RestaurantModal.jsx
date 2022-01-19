@@ -7,17 +7,17 @@ function RestaurantModal (props){
 return ( 
             <div className='RestaurantModal'>
                 <button class="button" onClick={() => setItemIsOpen(true)}>Restaurant </button> 
-                <Modal isOpen={itemIsOpen}>
+                <Modal  isOpen={itemIsOpen}>
                     <button class="button" onClick={() => props.func()}>Find Another Option</button>
                     <div>
                         {!props.place_review.data ? null:
                             <>
-                            <div>{`Name:  ${props.restaurantPick.name}`}</div>
-                            <div>{`Overall Rating:  ${props.restaurantPick.rating}`}</div>
-                            <div>{`Price Level:  ${props.restaurantPick.price_level}`}</div>
-                            <div>{`Restaurant Address:  ${props.restaurantPick.vicinity}`}</div>
-                            <div>{`Distance From You: ${props.distance}`}</div>
-                            <div>{`Reviews: `}</div>
+                            <div class="main-text">{`Name:  ${props.restaurantPick.name}`}</div>
+                            <div class="main-text">{`Overall Rating:  ${props.restaurantPick.rating}`}</div>
+                            <div class="main-text">{`Price Level:  ${props.restaurantPick.price_level}`}</div>
+                            <div class="main-text">{`Restaurant Address:  ${props.restaurantPick.vicinity}`}</div>
+                            <div class="main-text">{`Distance From You: ${props.distance}`}</div>
+                            <div class="main-text">{`Reviews: `}</div>
                             <div>{props.place_review.data.result.reviews[0].author_name}   Rated It:  {props.place_review.data.result.reviews[0].rating}</div>
                             <div>{props.place_review.data.result.reviews[0].text}</div>
                             <br/>
