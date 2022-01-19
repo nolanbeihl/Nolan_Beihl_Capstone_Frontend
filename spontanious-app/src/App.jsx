@@ -224,25 +224,23 @@ class App extends Component{
 
     render() {
         return(
-            
-                <div className='container'>
-                    
-                    <h1>Select a type of Spontaneous Adventure</h1>   
-                    <div class="container">
-                    <div class="row"></div>
-                    </div><h1>
+            <div className="App">    
+                <h1>Select a type of Spontaneous Adventure</h1>   
+            <div class="container">
+                <div className="row">
+                    <h1>
                         Choose to filter with the below options
                     
                         If you want a completely random option just click on Entertainment or Restaurant
-                    <div className='dist'>
+                    <div className='dist' class="col-md-3">
                         Set distance from you in Miles
                     <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
                     </div>
-                    <div className='entOption'>
+                    <div  class="col-md-3"className='entOption'>
                         Options in type of Entertainment
                     <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
                     </div>
-                    <div className='priceOption'>
+                    <div  class="col-md-3">
                         Set Max Price Level
                     <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
                     </div>
@@ -258,8 +256,8 @@ class App extends Component{
                     </div>
                     </h1>
                  </div>
-               
-            
+               </div>
+            </div>
         );
 }}
 

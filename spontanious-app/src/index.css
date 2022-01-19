@@ -1,17 +1,25 @@
 
-.container{
+.App{
   animation:slide 4s ease-in-out infinite alternate;
   background-image: url(./DC_National_Mall_Map.png);
+  background-repeat: no-repeat;
+  background-size:cover;
   bottom:0;
   left:-100%;
-  opacity:.5;
-  position:fixed;
+  opacity:.8;
+  position:center;
   right:-100%;
   top:0;
   z-index:-5;
   width: 100%;
   padding: 0px;
   margin: 0px;
+  -moz-column-count: 1;
+  -moz-column-gap: 25%;
+  -webkit-column-count: 1;
+  -webkit-column-gap: 25%;
+  column-count: 1;
+  column-gap: 25%;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -42,10 +50,15 @@ code {
   
 }
 .row {
-
 border-radius: 500px;
 color: #845EC2;
 width: 100%;
+-moz-column-count: 4;
+-moz-column-gap: 25%px;
+-webkit-column-count: 4;
+-webkit-column-gap: 25%px;
+column-count: 4;
+column-gap: 25%px;
 }
 
 
