@@ -4,11 +4,10 @@
   background-image: url(./DC_National_Mall_Map.png);
   background-repeat: no-repeat;
   background-size:cover;
-  bottom:0;
-  left:-100%;
+
   opacity:.8;
   position:center;
-  right:-100%;
+
   top:0;
   z-index:-5;
   width: 100%;
@@ -20,45 +19,43 @@
   -webkit-column-gap: 25%;
   column-count: 1;
   column-gap: 25%;
-}
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  text-align: center;
 }
 
 .dist{
   padding: 10px;
-  background-color: white;
   width: 20%;
 }
 .entOption{
   padding: 10px;
-  background-color: white;
   width: 20%;
 }
 
 .priceOption{
-
+  padding: 10px;
+  width: 20%;
 }
 .location{
-
+  padding: 10px;
+  width: 20%;
 }
 .ent{
-
+  padding: 10px;
+  width: 20%;
 }
 .rest{
-  
+  padding: 10px;
+  width: 20%;
 }
 .row {
 border-radius: 500px;
-color: #845EC2;
+color: #050505;
 width: 100%;
--moz-column-count: 4;
+
 -moz-column-gap: 25%px;
--webkit-column-count: 4;
 -webkit-column-gap: 25%px;
-column-count: 4;
 column-gap: 25%px;
+text-align: center;
 }
 
 
@@ -76,25 +73,31 @@ h1 {
 .choice-list{
   border-radius: 30px;
   background-color: aquamarine;
+  text-emphasis: center;
+  text-size-adjust:inherit;
+  font-family:Arial, Helvetica, sans-serif;
+
  
 }
 div{
   text-align: center;
-  background-color: rgb(110, 236, 236);
+  background-color: rgb(253, 252, 232);
+  align-content: center;
+  text-align: center;
   text-shadow: floralwhite;
   
   padding: 0px;
   width: auto;
 }
 .button {
-  background-color: #36c349;
+  background-color: #e6f372;
   font: bolder;
   font-weight: bolder;
   font-style: italic;
   border-radius: 0vmin;
-  align-items: baseline;
+  align-items: center;
   border-radius: 16px;
-  cursor: hand;
+  cursor:hand;
 }
 
 ul {
@@ -102,4 +105,10 @@ ul {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 
+}
+.address{
+  background-image:url(./DC_National_Mall_Map.png); 
+  text-align: center;
+  text-size-adjust: 20px;
+  
 }

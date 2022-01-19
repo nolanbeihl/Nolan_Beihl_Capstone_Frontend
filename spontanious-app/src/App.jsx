@@ -225,39 +225,47 @@ class App extends Component{
     render() {
         return(
             <div className="App">    
-                <h1>Select a type of Spontaneous Adventure</h1>   
+                   
             <div class="container">
-                <div className="row">
-                    <h1>
-                        Choose to filter with the below options
+            <h1>Select a type of Spontaneous Adventure</h1>
+                <h1>
+                    <div className="row">
                     
-                        If you want a completely random option just click on Entertainment or Restaurant
-                    <div className='dist' class="col-md-3">
+                        Choose to filter with the below options </div>
+                    <div className="row">
+                        If you want a completely random option just click on Entertainment or Restaurant</div>
+                    <div className='dist' class="col-md-3"> </div>
+                    <div className="row">
                         Set distance from you in Miles
                     <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
                     </div>
-                    <div  class="col-md-3"className='entOption'>
+                    <div className="row">
+                    <div  class="col-md-3"className="entOption">
                         Options in type of Entertainment
                     <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
                     </div>
-                    <div  class="col-md-3">
+                    </div>
+                    <div className="row">
+                    <div  class="col-md-3" className="price">
                         Set Max Price Level
                     <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
                     </div>
-                    <div className='location'>
+                    </div>
+                    <div className="row">
+                    <div className="location">
                         See Your Current Location
                     <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                     </div>
-                    <div className='ent'>
+                    </div>
+                    <div className="ent">
                     <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
                     </div>
-                    <div className='rest'>
+                    <div className="rest">
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
                     </h1>
                  </div>
                </div>
-            </div>
         );
 }}
 
