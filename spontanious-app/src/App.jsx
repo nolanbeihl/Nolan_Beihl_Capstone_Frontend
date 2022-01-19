@@ -8,6 +8,7 @@ import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentMod
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
+import UserAddress from "./Components/UserAddress/UserAddress";
 
 
 const entOptions = [
@@ -155,7 +156,7 @@ class App extends Component{
     }
 
     nearbyRestaurant = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
         this.setState({
             restaurants : [response.data]
         })
@@ -174,7 +175,7 @@ class App extends Component{
     }
     
     nearbyEntertainment = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
         this.setState({
             entertainments : [response.data]
         })
@@ -239,6 +240,12 @@ class App extends Component{
                 openOrClosed : false
         })
     }
+
+    setAddress = async(setOption)=> {
+        this.setState({
+            address : setOption
+        })
+    }
     render() {
         return(
             <div className="App">    
@@ -286,6 +293,7 @@ class App extends Component{
                     <div className="rest">
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
+                    {/* <UserAddress setOption ={this.setAddress}/> */}
                     </h1>
                  </div>
                </div>
