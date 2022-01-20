@@ -250,52 +250,51 @@ class App extends Component{
         return(
             <div className="App">    
                    
-            <div class="container">
+            <div className="container">
             <h1>Select a type of Spontaneous Adventure</h1>
                 <h1>
-                    <div className="row">
-                    
-                        Choose to filter with the below options </div>
-                    <div className="row">
+                    <div className="row-1">
                         If you want a completely random option just click on Entertainment or Restaurant</div>
-                    <div className='dist' class="col-md-3"> </div>
                     <div className="row">
-                        Set distance from you in Miles
-                    <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+                    <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
+                    <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
                     <div className="row">
-                    <div  class="col-md-3"className="entOption">
+                        Or choose to filter with the below options </div>
+                 
+                    <div className="row">
+                    
+                        Set distance from you in miles
+                    <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+                    </div>
+                    
+                    <div className="row" >
+                    
                         Options in type of Entertainment
                     <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
                     </div>
-                    </div>
+                    
                     <div className="row">
-                    <div  class="col-md-3" className="price">
+                    
                         Set Max Price Level
                     <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
                     </div>
-                    </div>
+                    
                     <div className="row">
-                    <div  class="col-md-3" className="price">
+                    
                         Option to Filter by Open/Closed
                     <UserChoice options = {open} setOption={this.setStatus}/>
                     </div>
-                    </div>
                     <div className="row">
-                    <div className="location">
+                   
                         See Your Current Location
                     <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
                     </div>
-                    </div>
-                    <div className="ent">
-                    <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
-                    </div>
-                    <div className="rest">
-                    <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
-                    </div>
+                   
                     {/* <UserAddress setOption ={this.setAddress}/> */}
-                    </h1>
-                 </div>
+                </h1>
+                
+               </div>
                </div>
         );
 }}
