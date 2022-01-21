@@ -243,7 +243,9 @@ class App extends Component{
 
     setAddress = async(setOption)=> {
         this.setState({
-            address : setOption
+            street : setOption.street,
+            city : setOption.city,
+            state : setOption.state
         })
     }
     render() {
@@ -288,7 +290,7 @@ class App extends Component{
                     <div className="row">
                    
                         See Your Current Location
-                    <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress}/>
+                    <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
                     </div>
                    
                     {/* <UserAddress setOption ={this.setAddress}/> */}

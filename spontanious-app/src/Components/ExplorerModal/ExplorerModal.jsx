@@ -4,16 +4,16 @@ import Form from 'react-bootstrap/Form';
 
 
 function AddressModal (){
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     }
-    const [street, setStreet] = React.useState("");
-    const [city, setCity] = React.useState("");
-    const [state, setState] = React.useState("");
+    const [street, setStreet] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
 
     const customStyles={
         content: {
@@ -27,22 +27,25 @@ function AddressModal (){
         }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, props) => {
         console.log(`
         Street: ${street}
         City: ${city}
         State: ${state}
         `);
+        // props.setOption(street);
+        // props.setOption(city);
+        // props.setOption(state);
         event.preventDefault();
     }
 
 
     return(
         <React.Fragment>
-            <button onClick={handleOpen}>Change Address</button>
+            <button className="button" onClick={handleOpen}>Change Address</button>
             <Modal
                 hideBackDrop
-                open={open}
+                isOpen={open}
                 onClose={handleClose}
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
@@ -76,15 +79,16 @@ function AddressModal (){
                                 onChange={e=> setState(e.target.value)}
                                 required />
                         </label>
-                        <button onclick={handleSubmit}> Submit</button>
+                        <button className="button" type="submit" onClick={handleSubmit}> Submit</button>
+                        <button className="button" type="submit" onClick={handleClose}>Back To Location</button>
                     </form>
                 
                 </Modal>
         </React.Fragment>
     );
     }
-export default function ExplorerModal(){
-    const [open,setItemIsOpen] = React.useState(false);
+export default function ExplorerModal(props){
+    const [open,setItemIsOpen] = useState(false);
     const handleOpen =() => {
         setItemIsOpen(true);
     };
@@ -94,20 +98,20 @@ export default function ExplorerModal(){
 
     return(
         <div>
-            <button onClick={handleOpen}>See Current Location</button>
+            <button className="button" onClick={handleOpen}>See Current Location</button>
             <Modal
-                open={open}
+                isOpen={open}
                 onClose={handleClose}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
                 >
-                     <button class="button-1" onClick={() => this.props.func()}>Refresh Location</button>
+                     <button class="button-1" onClick={() => props.func()}>Refresh Location</button>
                      <button class="button-1" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
-                     {!this.props.readableAddress ? null:
+                     {!props.readableAddress ? null:
                      <div className="address">
                         <> 
                         <div><h3>Current Location: </h3> </div>
-                        <div><h3>{this.props.readableAddress}</h3></div></>
+                        <div><h3>{props.readableAddress}</h3></div></>
                     </div>
 }
                 <AddressModal />
@@ -118,11 +122,12 @@ export default function ExplorerModal(){
                 
 
 
+//Previous Attempts at forms
 
 
 // return ( 
 //             <div class="container">
-//                 <button class="button" onClick={() => setItemIsOpen(true)}>See Your Location </button> 
+//                 <button className="button" onClick={() => setItemIsOpen(true)}>See Your Location </button> 
 //                 <Modal isOpen={itemIsOpen} style={customStyles}>
 //                     <button class="button-1" onClick={() => props.func()}>Refresh Location</button>
 //                     <button class="button-1" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
@@ -143,7 +148,6 @@ export default function ExplorerModal(){
 // export default ExplorerModal;
 
 
-//Previous Attempts at forms
 
 // function addressForm (){
 //     <form onSubmit={onSubmit}>
