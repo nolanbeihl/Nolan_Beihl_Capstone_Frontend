@@ -33,7 +33,7 @@ class UserChoice extends React.Component {
                     ))}
                 </select> 
                 </label>
-                <input class="button" type="submit" value="Submit"/>
+                <input className="button" type="submit" value="Submit"/>
             </form>
             
         );

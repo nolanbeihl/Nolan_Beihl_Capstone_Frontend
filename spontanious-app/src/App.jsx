@@ -150,6 +150,14 @@ class App extends Component{
             lng: (response.data.location.lng)
         })
     }
+    addressUpdate = async()=> {
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.street},+${this.state.city},+${this.state.state}&key=${this.state.apiKey}`)
+        this.setState({
+            lat: (response.data.results[0].geometry.location.lat),
+            lng: (response.data.results[0].geometry.location.lng),
+        })
+        this.convertLocation()
+    }
     
     convertLocation = async() =>{
         let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${this.state.anotherKey}`)
@@ -251,6 +259,8 @@ class App extends Component{
             city : setOption[1],
             state : setOption[2],
         })
+        this.addressUpdate();
+
     }
     render() {
         return(
