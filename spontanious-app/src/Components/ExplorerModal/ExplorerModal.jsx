@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Form from 'react-bootstrap/Form';
 
 
-function AddressModal (){
+export function AddressModal (props){
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -14,7 +14,7 @@ function AddressModal (){
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
-
+    var address = [street, city, state];
     const customStyles={
         content: {
             top : '50%',
@@ -27,15 +27,13 @@ function AddressModal (){
         }
     };
 
-    const handleSubmit = (event, props) => {
+    const handleSubmit = (event) => {
         console.log(`
         Street: ${street}
         City: ${city}
         State: ${state}
         `);
-        // props.setOption(street);
-        // props.setOption(city);
-        // props.setOption(state);
+        props.func(address);
         event.preventDefault();
     }
 
@@ -49,6 +47,7 @@ function AddressModal (){
                 onClose={handleClose}
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
+                styles={customStyles}
                 >
                     <form onSubmit={handleSubmit}>
                         <h1>Change Address</h1>
@@ -71,7 +70,7 @@ function AddressModal (){
                                 required />
                         </label>
                         <label>
-                            State:
+                            2 Letter State:
                             <input  
                                 name="state"
                                 type="text"
@@ -87,6 +86,8 @@ function AddressModal (){
         </React.Fragment>
     );
     }
+
+
 export default function ExplorerModal(props){
     const [open,setItemIsOpen] = useState(false);
     const handleOpen =() => {

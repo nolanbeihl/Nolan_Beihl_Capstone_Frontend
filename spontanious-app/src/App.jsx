@@ -9,6 +9,7 @@ import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
 import UserAddress from "./Components/UserAddress/UserAddress";
+import { AddressModal } from "./Components/ExplorerModal/ExplorerModal";
 
 
 const entOptions = [
@@ -134,6 +135,9 @@ class App extends Component{
             choiceLng : 0,
             distance : '',
             openOrClosed: true,
+            street: '',
+            city: '',
+            state: '',
         }
     }
     componentDidMount(){
@@ -243,9 +247,9 @@ class App extends Component{
 
     setAddress = async(setOption)=> {
         this.setState({
-            street : setOption.street,
-            city : setOption.city,
-            state : setOption.state
+            street : setOption[0],
+            city : setOption[1],
+            state : setOption[2],
         })
     }
     render() {
@@ -291,6 +295,7 @@ class App extends Component{
                    
                         See Your Current Location
                     <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
+                    <AddressModal func={this.setAddress}/>
                     </div>
                    
                     {/* <UserAddress setOption ={this.setAddress}/> */}
