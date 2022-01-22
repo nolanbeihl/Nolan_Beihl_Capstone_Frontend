@@ -22,7 +22,7 @@
 .row {
   border-radius: 1000px;
   color: black;
-  width: 100%;
+  width: auto;
   padding: 0px;
   margin: 0px;
   column-gap: 15%;
@@ -44,6 +44,7 @@ h1 {
   text-align:center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bolder;
+  font-style:italic;
   font-size: 80px;
   color: black;
   padding-bottom: 0px;
@@ -71,7 +72,9 @@ div{
   width: auto;
   border-color: black;
 }
-
+.form.button{
+  max-width: 40%;
+}
 .button {
   background-color: #e6f372;
   font: bolder;
@@ -120,7 +123,25 @@ div{
   font: bolder;
 }
 
-.RestaurantModal{
- max-height: calc(100% - 80px);
- max-width: calc(100% - 80px);
+.Modal{
+ top: 50%;
+ left: 50%;
+ position: fixed;
+ transform: translate(-50%, -50%);
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transform: translateX(-400px);
+  transition: all 2000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transform: translateX(800px);
 }

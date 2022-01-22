@@ -8,7 +8,6 @@ import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentMod
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
-import UserAddress from "./Components/UserAddress/UserAddress";
 import { AddressModal } from "./Components/ExplorerModal/ExplorerModal";
 
 
@@ -202,7 +201,6 @@ class App extends Component{
                 ent_review : place_review,
                 distance : distanceTo.data.rows[0].elements[0].distance.text,
             })
-        
     }
    
     setEntertainment = (setOption)=>{
@@ -265,7 +263,6 @@ class App extends Component{
     render() {
         return(
             <div className="App">    
-                   
             <div className="container">
             <h1>Select a type of Spontaneous Adventure</h1>
                 <h1>
@@ -277,45 +274,33 @@ class App extends Component{
                     </div>
                     <div className="row">
                         Or choose to filter with the below options </div>
-                 
                     <div className="row">
-                    
                         Set distance from you in miles
                     <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
                     </div>
-                    
                     <div className="row" >
-                    
                         Options in type of Entertainment
                     <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
                     </div>
-                    
                     <div className="row">
-                    
                         Set Max Price Level
                     <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
                     </div>
-                    
                     <div className="row">
-                    
                         Option to Filter by Open/Closed
                     <UserChoice options = {open} setOption={this.setStatus}/>
                     </div>
                     <div className="row">
-                   
                         See Your Current Location
-                    <ExplorerModal func = {this.convertLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
-                    <AddressModal func={this.setAddress}/>
+                    <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
                     </div>
-                   
-                    {/* <UserAddress setOption ={this.setAddress}/> */}
+                    <AddressModal func={this.setAddress}/>
                 </h1>
                 
                </div>
                </div>
         );
 }}
-
 export default App;
 
 
