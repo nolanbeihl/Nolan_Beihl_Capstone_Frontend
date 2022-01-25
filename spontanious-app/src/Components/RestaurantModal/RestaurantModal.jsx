@@ -5,7 +5,7 @@ function RestaurantModal (props){
     const [itemIsOpen, setItemIsOpen] = useState(false)
 
 return ( 
-            <div className='RestaurantModal'>
+            <div >
                 <button class="button" onClick={() => setItemIsOpen(true)}>Restaurant </button> 
                 <Modal  isOpen={itemIsOpen} className="Modal">
                     <button class="button" onClick={() => props.func()}>Click For Option</button>

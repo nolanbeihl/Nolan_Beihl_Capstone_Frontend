@@ -33,11 +33,11 @@ export function AddressModal (props){
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
                 >
-                    <form onSubmit={handleSubmit} className="row" >
+                    <form onSubmit={handleSubmit} className="row-1" >
                         <h1>Change Your Location</h1>
                         <h3>Replace any spaces with a '+'</h3>
                         <h5>See Example Below</h5>
-                        <label>
+                        <label className="formInput">
                             Street Address:
                             <input
                                 name="street"
@@ -47,7 +47,7 @@ export function AddressModal (props){
                                 onChange={e => setStreet(e.target.value)}
                                 required />
                         </label>
-                        <label>
+                        <label className="formInput">
                             City: 
                             <input
                                 name="city"
@@ -57,7 +57,7 @@ export function AddressModal (props){
                                 onChange={e=> setCity(e.target.value)}
                                 required />
                         </label>
-                        <label>
+                        <label className="formInput">
                             2 Letter State:
                             <input  
                                 name="state"
@@ -67,8 +67,8 @@ export function AddressModal (props){
                                 onChange={e=> setState(e.target.value)}
                                 required />
                         </label>
-                        <button className="button" type="submit" onClick={handleSubmit}> Submit</button>
-                        <button className="button" type="submit" onClick={handleClose}>Back To Menu</button>
+                        <button className="button-1" type="submit" onClick={handleSubmit}> Submit</button>
+                        <button className="button-1" type="submit" onClick={handleClose}>Back To Menu</button>
                     </form>
                 
                 </Modal>
@@ -103,6 +103,7 @@ export default function ExplorerModal(props){
                      <div className="address">
                         <> 
                         <div><h3>Current Location: </h3> </div>
+                        <br/>
                         <div><h3>{props.readableAddress}</h3></div></>
                     </div>
                     }

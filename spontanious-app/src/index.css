@@ -112,12 +112,6 @@ div{
 
 }
 
-.address{
- 
-  text-align: center;
-  text-size-adjust: 20px;
-}
-
 .main-text{
   font-weight: bolder;
   font: bolder;
@@ -128,6 +122,10 @@ div{
  left: 50%;
  position: fixed;
  transform: translate(-50%, -50%);
+}
+.formInput{
+  padding: 8px;
+  font-weight: bolder ;
 }
 
 .ReactModal__Overlay {
