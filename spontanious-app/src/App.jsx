@@ -50,27 +50,22 @@ const priceLevel = [
     {
         id: 1, 
         value: 0,
-        name: 'Cheap',
     },
     {
         id :2,
         value: 1,
-        name: 'Not very much',
     },
     {
         id: 3,
         value: 2,
-        name: 'Moderate',
     },
     {
         id: 4, 
         value: 3,
-        name: 'A little high',
     },
     {
         id: 5, 
         value: 4,
-        name: 'Are You Have Enough?',
     },
 ];
 
@@ -78,28 +73,27 @@ const radiusOptions = [
     {
         id: 1, 
         value: '1',
-        name: 'Close',
     },
     {
         id :2,
         value: '2',
-        name: 'Not Too Far',
     },
     {
         id: 3,
         value:'3',
-        name: 'Probably Need A ride',
     },
     {
         id: 4, 
         value: '4',
-        name: 'I Would Drive',
     },
     {
         id: 5, 
         value:'5',
-        name: 'Definitely Driving',
     },
+    {
+        id: 6,
+        value: 'Max',
+    }
 ];
 const open =[
     {
@@ -242,6 +236,10 @@ class App extends Component{
             this.setState({
                 radius : 8046
         })
+        if (setOption ==='Max')
+            this.setState({
+                radius : 50000
+            })
     }
 
     setStatus = async(setOption)=> {
