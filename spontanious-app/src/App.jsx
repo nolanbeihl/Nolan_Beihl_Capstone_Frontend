@@ -293,6 +293,7 @@ class App extends Component{
                     <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
                     </div>
                     <AddressModal func={this.setAddress}/>
+                    <Explorer />
                 </h1>
                 
                </div>
