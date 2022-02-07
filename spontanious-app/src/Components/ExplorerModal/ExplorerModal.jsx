@@ -69,7 +69,7 @@ export function AddressModal (props){
                         </label>
                         <button className="button-1" type="submit" onClick={handleSubmit}> Submit</button>
                         <button className="button-1" type="submit" onClick={handleClose}>Back To Menu</button>
-                        <button className="button-1" type="submit" onClick={Explorer}>Explorer Information</button>
+                        {/* <button className="button-1" type="submit" onClick={Explorer}>Explorer Information</button> */}
                     </form>
                 
                 </Modal>

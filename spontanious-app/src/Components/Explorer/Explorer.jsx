@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
+import Modal from 'react-modal';
 
 
 
@@ -8,6 +9,9 @@ class Explorer extends Component {
         super(props);
         this.state = {
          explorer_id : '',
+         firstName: '',
+         lastName:'',
+
         
         }
     }
@@ -20,15 +24,19 @@ class Explorer extends Component {
 
     handleSubmit = async(event) =>{
         event.preventDefault();
-        await axios.post('http://127.0.0.1:8000/api/explorers/',this.state)
+        await axios.post('http://127.0.0.1:8000/api/explorers_explorer/',this.state)
     }
 
     render(){
         return(
             <div class= "container" width="50%" height= "20%">
             <form onSubmit ={(event) => this.handleSubmit(event)}>
-                <label>Explorer Information</label>
-                    <input type = 'text' name="comment" onChange = {this.handleChange} value = {this.state.explorer_id}/>
+                <label>Explorer First Name
+                    <input type = 'text' name="firstName" onChange = {this.handleChange} value = {this.state.firstName}/>
+                    </label>
+                <label>Explorer Last Name
+                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.lastName}/>
+                    </label>
                 <button onClick={this.handleSubmit} type = "submit" value = "Submit"> Submit information</button>
             </form>
             </div>
