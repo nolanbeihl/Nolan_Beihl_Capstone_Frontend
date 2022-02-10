@@ -9,6 +9,7 @@ import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import UserChoice from "./Components/UserChoice/UserChoice";
 import { AddressModal } from "./Components/ExplorerModal/ExplorerModal";
+import FilterModal, { Filter } from "./Components/FilterModal/FilterModal";
 
 
 const entOptions = [
@@ -270,11 +271,11 @@ class App extends Component{
                     <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         Or choose to filter with the below options </div>
                     <div className="row">
-                        Set distance from you in miles
-                    <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+                        Set distance from you in miles */}
+                    {/* <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
                     </div>
                     <div className="row" >
                         Options in type of Entertainment
@@ -287,13 +288,13 @@ class App extends Component{
                     <div className="row">
                         Option to Filter by Open/Closed
                     <UserChoice options = {open} setOption={this.setStatus}/>
-                    </div>
+                    </div> */}
                     <div className="row">
                         See Your Current Location
                     <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
                     </div>
                     <AddressModal func={this.setAddress}/>
-                    <Explorer />
+                    <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
                 </h1>
                 
                </div>

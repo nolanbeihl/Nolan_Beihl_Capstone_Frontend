@@ -100,7 +100,7 @@ const openClosed =[
 ];
 
 
-export function Filter (props){
+export default function Filter (props){
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -109,24 +109,33 @@ export function Filter (props){
         setOpen(false);
     }
     const [entOption, setOption] = useState("");
-    const [priceLevel, setOption] = useState("");
-    const [radiusOptions, setOption] = useState("");
-    const [openClosed, setOption] = useState("");
+    const [priceLevel, setPrice] = useState("");
+    const [radiusOption, setRad] = useState("");
+    const [openClosed, setClosed] = useState("");
    
     const entSubmit = (event) => {
-        props.func(entOption);
+        props.ent(entOption);
         event.preventDefault();
     }
     const priceSubmit = (event) => {
-        props.func(priceLevel);
+        props.price(priceLevel);
         event.preventDefault();
     }
     const radiusSubmit = (event) => {
-        props.func(radiusOption);
+        props.rad(radiusOption);
         event.preventDefault();
     }
-    const handleChange = (event) =>{
-        this.setState({value: event.target.value});
+    const statusSubmit = (event) =>{
+        props.status(openClosed);
+        event.preventDefault();
+    }
+    // const handleChange = (event) =>{
+    //     event.preventDefault();
+    //     this.setState({value: event.target.value});
+    // }
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        this.setState({value : event.target.value})
     }
 
     return(
@@ -140,35 +149,45 @@ export function Filter (props){
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
                 >
-                <form onSubmit={this.handleSubmit()}>
+                <form onSubmit={setOption()}>
                     <label className="choice-list">
-                    <select value={(this.entOption)} onChange={this.handleChange()}  >
-                {this.entOptions.map(item =>  (
+                    <select value={(entOption)}   >
+                {entOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                <input className="button" type="submit" value="Submit"/>
+                <button className="button" onClick={(item) => entSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={this.handleSubmit()}>
+                <form onSubmit={setPrice()}>
                     <label className="choice-list">
-                    <select value={(this.priceLevel)} onChange={this.handleChange()}  >
-                {this.priceLevel.map(item =>  (
+                    <select value={(priceLevel)}   >
+                {priceLevel.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                <input className="button" type="submit" value="Submit"/>
+                    <button className="button" onClick={(item) => priceSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={this.handleSubmit()}>
+                <form onSubmit={setRad()}>
                     <label className="choice-list">
-                    <select value={(this.radiusOption)} onChange={this.handleChange()}  >
-                {this.radiusOptions.map(item =>  (
+                    <select value={(radiusOption)}   >
+                {radiusOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                <input className="button" type="submit" value="Submit"/>
+                    <button className="button" onClick={(item) => radiusSubmit(item.value)}>Select</button>
+                </form>
+                <form onSubmit={setClosed()}>
+                    <label className="choice-list">
+                    <select value={(openClosed)}   >
+                {openClosed.map(item =>  (
+                    <option key={item.id} value={item.value}>{item.value}</option>    
+                ))}
+                    </select> 
+                    </label>
+                    <button className="button" onClick={(item) => statusSubmit(item.value)}>Select</button>
                 </form>
             </Modal>
         </React.Fragment>
@@ -192,38 +211,39 @@ export function Filter (props){
 //     }
 // }
 
-export default function ExplorerModal(props){
-    const [open,setItemIsOpen] = useState(false);
-    const handleOpen =() => {
-        setItemIsOpen(true);
-    };
-    const handleClose = () => {
-        setItemIsOpen(false);
-    };
+// export default function FilterModal(props){
+//     const [open,setItemIsOpen] = useState(false);
+//     const handleOpen =() => {
+//         setItemIsOpen(true);
+//     };
+//     const handleClose = () => {
+//         setItemIsOpen(false);
+//     };
 
-    return(
-        <div>
-            <button className="button" onClick={handleOpen}>See Current Location</button>
-            <Modal
-                className="Modal"
-                closeTimeoutMS={500}
-                isOpen={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-                >
-                     <button className="button-1" onClick={() => props.func()}>Refresh Location</button>
-                     <button className="button-1" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
-                     {!props.readableAddress ? null:
-                     <div className="address">
-                        <> 
-                        <div><h3>Current Location: </h3> </div>
-                        <br/>
-                        <div><h3>{props.readableAddress}</h3></div></>
-                    </div>
-                    }
-            </Modal>
-        </div>
-    );
-}       
+//     return(
+//         <div>
+//             <button className="button" onClick={handleOpen}>See Current Location</button>
+//             <Modal
+//                 className="Modal"
+//                 closeTimeoutMS={500}
+//                 isOpen={open}
+//                 onClose={handleClose}
+//                 aria-labelledby="parent-modal-title"
+//                 aria-describedby="parent-modal-description"
+//                 >
+//                      <button className="button-1" onClick={() => props.func()}>Refresh Location</button>
+//                      <button className="button-1" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
+//                      {!props.readableAddress ? null:
+//                      <div className="address">
+//                         <> 
+//                         <div><h3>Current Location: </h3> </div>
+//                         <br/>
+//                         <div><h3>{props.readableAddress}</h3></div></>
+//                     </div>
+//                     }
+//                     <Filter />
+//             </Modal>
+//         </div>
+//     );
+// }       
                 
