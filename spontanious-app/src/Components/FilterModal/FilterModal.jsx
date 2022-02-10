@@ -2,197 +2,313 @@ import React , { Component, useState } from 'react';
 import Modal from 'react-modal';
 import Form from 'react-bootstrap/Form';
 import Explorer from '../Explorer/Explorer';
+import ExplorerModal from '../ExplorerModal/ExplorerModal';
 
-
-const entOptions = [
-    {
-        id: 1, 
-        value: 'amusement_park',
-    },
-    {
-        id :2,
-        value: 'bowling_alley',
-    },
-    {
-        id: 3,
-        value:'museum',
-    },
-    {
-        id: 4, 
-        value: 'night_club',
-    },
-    {
-        id: 5, 
-        value:'aquarium',
-    },
-    {
-        id: 6,
-        value: 'casino',
-    },
-    {
-        id: 7, 
-        value: 'tourist_attraction',
-    },
-    {
-        id: 8, 
-        value: 'zoo',
+class FilterModal extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            entOption: "tourist_attraction",
+            priceLevel: "1",
+            radiusOption: "1",
+            status: "Open",
+            entOptions: [
+                {
+                    id: 1, 
+                    value: 'amusement_park',
+                },
+                {
+                    id :2,
+                    value: 'bowling_alley',
+                },
+                {
+                    id: 3,
+                    value:'museum',
+                },
+                {
+                    id: 4, 
+                    value: 'night_club',
+                },
+                {
+                    id: 5, 
+                    value:'aquarium',
+                },
+                {
+                    id: 6,
+                    value: 'casino',
+                },
+                {
+                    id: 7, 
+                    value: 'tourist_attraction',
+                },
+                {
+                    id: 8, 
+                    value: 'zoo',
+                }
+            ],
+            priceLevels: [
+                {
+                    id: 1, 
+                    value: 0,
+                },
+                {
+                    id :2,
+                    value: 1,
+                },
+                {
+                    id: 3,
+                    value: 2,
+                },
+                {
+                    id: 4, 
+                    value: 3,
+                },
+                {
+                    id: 5, 
+                    value: 4,
+                },
+            ],
+            radiusOptions: [
+                {
+                    id: 1, 
+                    value: '1',
+                },
+                {
+                    id :2,
+                    value: '2',
+                },
+                {
+                    id: 3,
+                    value:'3',
+                },
+                {
+                    id: 4, 
+                    value: '4',
+                },
+                {
+                    id: 5, 
+                    value:'5',
+                },
+                {
+                    id: 6,
+                    value: 'Max',
+                }
+            ],
+            openClosed: [
+                {
+                    id: 1,
+                    value: 'Open',
+                },
+                {
+                    id: 2,
+                    value: 'Closed',
+                },
+            ],
+            openModal : false,
+        }; 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-];
+    
+    // const entOptions = [
+    //     {
+    //         id: 1, 
+    //         value: 'amusement_park',
+    //     },
+    //     {
+    //         id :2,
+    //         value: 'bowling_alley',
+    //     },
+    //     {
+    //         id: 3,
+    //         value:'museum',
+    //     },
+    //     {
+    //         id: 4, 
+    //         value: 'night_club',
+    //     },
+    //     {
+    //         id: 5, 
+    //         value:'aquarium',
+    //     },
+    //     {
+    //         id: 6,
+    //         value: 'casino',
+    //     },
+    //     {
+    //         id: 7, 
+    //         value: 'tourist_attraction',
+    //     },
+    //     {
+    //         id: 8, 
+    //         value: 'zoo',
+    //     }
+    // ];
 
-const priceLevel = [
-    {
-        id: 1, 
-        value: 0,
-    },
-    {
-        id :2,
-        value: 1,
-    },
-    {
-        id: 3,
-        value: 2,
-    },
-    {
-        id: 4, 
-        value: 3,
-    },
-    {
-        id: 5, 
-        value: 4,
-    },
-];
+    // const priceLevel = [
+    //     {
+    //         id: 1, 
+    //         value: 0,
+    //     },
+    //     {
+    //         id :2,
+    //         value: 1,
+    //     },
+    //     {
+    //         id: 3,
+    //         value: 2,
+    //     },
+    //     {
+    //         id: 4, 
+    //         value: 3,
+    //     },
+    //     {
+    //         id: 5, 
+    //         value: 4,
+    //     },
+    // ];
 
-const radiusOptions = [
-    {
-        id: 1, 
-        value: '1',
-    },
-    {
-        id :2,
-        value: '2',
-    },
-    {
-        id: 3,
-        value:'3',
-    },
-    {
-        id: 4, 
-        value: '4',
-    },
-    {
-        id: 5, 
-        value:'5',
-    },
-    {
-        id: 6,
-        value: 'Max',
-    }
-];
-const openClosed =[
-    {
-        id: 1,
-        value: 'Open',
-    },
-    {
-        id: 2,
-        value: 'Closed',
-    },
-];
+    // const radiusOptions = [
+    //     {
+    //         id: 1, 
+    //         value: '1',
+    //     },
+    //     {
+    //         id :2,
+    //         value: '2',
+    //     },
+    //     {
+    //         id: 3,
+    //         value:'3',
+    //     },
+    //     {
+    //         id: 4, 
+    //         value: '4',
+    //     },
+    //     {
+    //         id: 5, 
+    //         value:'5',
+    //     },
+    //     {
+    //         id: 6,
+    //         value: 'Max',
+    //     }
+    // ];
+    // const openClosed =[
+    //     {
+    //         id: 1,
+    //         value: 'Open',
+    //     },
+    //     {
+    //         id: 2,
+    //         value: 'Closed',
+    //     },
+    // ];
 
 
-export default function Filter (props){
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    }
-    const [entOption, setOption] = useState("");
-    const [priceLevel, setPrice] = useState("");
-    const [radiusOption, setRad] = useState("");
-    const [openClosed, setClosed] = useState("");
+// export default function Filter (props){
+//     const [open, setOpen] = useState(false);
+//     const handleOpen = () => {
+//         setOpen(true);
+//     };
+//     const handleClose = () => {
+//         setOpen(false);
+//     }
+//     const [entOption, setOption] = useState("");
+//     const [priceLevel, setPrice] = useState("");
+//     const [radiusOption, setRad] = useState("");
+//     const [openClosed, setClosed] = useState("");
    
-    const entSubmit = (event) => {
-        props.ent(entOption);
-        event.preventDefault();
+    entSubmit = (event) => {
+        this.props.ent(event);
+        // event.preventDefault();
     }
-    const priceSubmit = (event) => {
-        props.price(priceLevel);
-        event.preventDefault();
+    priceSubmit = (event) => {
+        this.props.price(event);
+        // event.preventDefault();
     }
-    const radiusSubmit = (event) => {
-        props.rad(radiusOption);
-        event.preventDefault();
+    radiusSubmit = (event) => {
+        this.props.rad(event);
+        // event.preventDefault();
     }
-    const statusSubmit = (event) =>{
-        props.status(openClosed);
-        event.preventDefault();
+    statusSubmit = (event) =>{
+        this.props.status(event);
+        // event.preventDefault();
     }
-    // const handleChange = (event) =>{
-    //     event.preventDefault();
-    //     this.setState({value: event.target.value});
-    // }
-    const handleSubmit = (event) =>{
+    handleChange = (event) =>{
+        event.preventDefault();
+        this.setState({value: event.target.value});
+    }
+    handleSubmit = (event) =>{
         event.preventDefault();
         this.setState({value : event.target.value})
     }
+    onClickButton = e =>{
+        e.preventDefault()
+        this.setState({openModal : true})
+    }
+    onCloseModal = ()=>{
+        this.setState({openModal : false})
+    }
 
-    return(
+    render(){
+        return(
         <React.Fragment>
-            <button className="button" onClick={handleOpen}>Select Type Of Entertainment</button>
+            <button className="button" onClick={this.onClickButton}>Select Filters</button>
             <Modal
                 className="Modal"
                 hideBackDrop
-                isOpen={open}
-                onClose={handleClose}
+                open={this.state.openModal}
+                onClose={this.onCloseModal}
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
                 >
-                <form onSubmit={setOption()}>
+                <form onSubmit={this.entSubmit()}>
                     <label className="choice-list">
-                    <select value={(entOption)}   >
-                {entOptions.map(item =>  (
+                    <select value={(this.state.entOptions)}   >
+                {this.state.entOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                <button className="button" onClick={(item) => entSubmit(item.value)}>Select</button>
+                <button className="button" onClick={(item) => this.entSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={setPrice()}>
+                <form onSubmit={this.priceSubmit()}>
                     <label className="choice-list">
-                    <select value={(priceLevel)}   >
-                {priceLevel.map(item =>  (
+                    <select value={(this.state.priceLevels)}   >
+                {this.state.priceLevels.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                    <button className="button" onClick={(item) => priceSubmit(item.value)}>Select</button>
+                    <button className="button" onClick={(item) => this.priceSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={setRad()}>
+                <form onSubmit={this.radiusSubmit()}>
                     <label className="choice-list">
-                    <select value={(radiusOption)}   >
-                {radiusOptions.map(item =>  (
+                    <select value={(this.state.radiusOptions)}   >
+                {this.state.radiusOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                    <button className="button" onClick={(item) => radiusSubmit(item.value)}>Select</button>
+                    <button className="button" onClick={(item) => this.radiusSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={setClosed()}>
+                <form onSubmit={this.statusSubmit()}>
                     <label className="choice-list">
-                    <select value={(openClosed)}   >
-                {openClosed.map(item =>  (
+                    <select value={(this.state.openClosed)}   >
+                {this.state.openClosed.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
                     </select> 
                     </label>
-                    <button className="button" onClick={(item) => statusSubmit(item.value)}>Select</button>
+                    <button className="button" onClick={(item) => this.statusSubmit(item.value)}>Select</button>
                 </form>
             </Modal>
         </React.Fragment>
-    );
+        );
+    }
 }
+export default FilterModal;
 
 // render(){
 //     return(
