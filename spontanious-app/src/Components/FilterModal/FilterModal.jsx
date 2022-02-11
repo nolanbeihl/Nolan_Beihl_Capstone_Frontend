@@ -110,27 +110,27 @@ class FilterModal extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    entSubmit = (event) => {
+    entSubmit  (event) {
         this.props.ent(event);
         event.preventDefault();
     }
-    priceSubmit = (event) => {
+    priceSubmit  (event) {
         this.props.price(event);
         event.preventDefault();
     }
-    radiusSubmit = (event) => {
+    radiusSubmit  (event) {
         this.props.rad(event);
         event.preventDefault();
     }
-    statusSubmit = (event) =>{
+    statusSubmit  (event) {
         this.props.status(event);
         event.preventDefault();
     }
-    handleChange = (event) =>{
-        // event.preventDefault();
+    handleChange (event) {
+        event.preventDefault();
         this.setState({value: event.target.value});
     }
-    handleSubmit = (event) =>{
+    handleSubmit (event) {
         event.preventDefault();
         this.setState({value : event.target.value})
     }
@@ -156,7 +156,7 @@ class FilterModal extends React.Component {
                 >
                 <form onSubmit={this.entSubmit}>
                     <label className="choice-list">Entertainment Type <br/>
-                    <select value={(this.state.entOptions)} onChange={this.handleChange}>
+                    <select value={(this.state.entOptions)} onChange={this.entSubmit}>
                 {this.state.entOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}
