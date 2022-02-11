@@ -111,6 +111,7 @@ class FilterModal extends React.Component {
     }
     
     entSubmit  (event) {
+        this.state.setState({entOption: event.target.value});
         this.props.ent(event);
         event.preventDefault();
     }
@@ -162,7 +163,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                <button className="button" onClick={(item) => this.entSubmit(item.value)}>Select</button>
+                <input className="button" type="submit" value="Submit"/>
                 </form>
                 <form onSubmit={this.priceSubmit}>Price Level <br/>
                     <label className="choice-list">
