@@ -127,7 +127,7 @@ class FilterModal extends React.Component {
         event.preventDefault();
     }
     handleChange = (event) =>{
-        event.preventDefault();
+        // event.preventDefault();
         this.setState({value: event.target.value});
     }
     handleSubmit = (event) =>{
@@ -149,13 +149,13 @@ class FilterModal extends React.Component {
             <Modal
                 className="Modal"
                 hideBackDrop
-                open={this.state.openModal}
+                isOpen={this.state.openModal}
                 onClose={this.onCloseModal}
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
                 >
                 <form onSubmit={this.entSubmit}>
-                    <label className="choice-list">
+                    <label className="choice-list">Entertainment Type <br/>
                     <select value={(this.state.entOptions)} onChange={this.handleChange}>
                 {this.state.entOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
@@ -164,7 +164,7 @@ class FilterModal extends React.Component {
                     </label>
                 <button className="button" onClick={(item) => this.entSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={this.priceSubmit}>
+                <form onSubmit={this.priceSubmit}>Price Level <br/>
                     <label className="choice-list">
                     <select value={(this.state.priceLevels)} onChange={this.handleChange}  >
                 {this.state.priceLevels.map(item =>  (
@@ -174,7 +174,7 @@ class FilterModal extends React.Component {
                     </label>
                     <button className="button" onClick={(item) => this.priceSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={this.radiusSubmit}>
+                <form onSubmit={this.radiusSubmit}>Distance In Miles From You <br/>
                     <label className="choice-list">
                     <select value={(this.state.radiusOptions)}  onChange={this.handleChange} >
                 {this.state.radiusOptions.map(item =>  (
@@ -184,7 +184,7 @@ class FilterModal extends React.Component {
                     </label>
                     <button className="button" onClick={(item) => this.radiusSubmit(item.value)}>Select</button>
                 </form>
-                <form onSubmit={this.statusSubmit}>
+                <form onSubmit={this.statusSubmit}>Open or Closed <br/>
                     <label className="choice-list">
                     <select value={(this.state.openClosed)} onChange={this.handleChange}  >
                 {this.state.openClosed.map(item =>  (
@@ -194,6 +194,7 @@ class FilterModal extends React.Component {
                     </label>
                     <button className="button" onClick={(item) => this.statusSubmit(item.value)}>Select</button>
                 </form>
+                <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
             </Modal>
         </div>
         );
