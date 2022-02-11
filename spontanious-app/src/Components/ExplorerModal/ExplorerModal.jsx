@@ -1,7 +1,7 @@
 import React , { Component, useState } from 'react';
 import Modal from 'react-modal';
-import Form from 'react-bootstrap/Form';
-import Explorer from '../Explorer/Explorer';
+// import Form from 'react-bootstrap/Form';
+// import Explorer from '../Explorer/Explorer';
 
 export function AddressModal (props){
     const [open, setOpen] = useState(false);
