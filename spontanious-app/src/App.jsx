@@ -12,100 +12,6 @@ import { AddressModal } from "./Components/ExplorerModal/ExplorerModal";
 import FilterModal, { Filter } from "./Components/FilterModal/FilterModal";
 
 
-const entOptions = [
-    {
-        id: 1, 
-        value: 'amusement_park',
-    },
-    {
-        id :2,
-        value: 'bowling_alley',
-    },
-    {
-        id: 3,
-        value:'museum',
-    },
-    {
-        id: 4, 
-        value: 'night_club',
-    },
-    {
-        id: 5, 
-        value:'aquarium',
-    },
-    {
-        id: 6,
-        value: 'casino',
-    },
-    {
-        id: 7, 
-        value: 'tourist_attraction',
-    },
-    {
-        id: 8, 
-        value: 'zoo',
-    }
-];
-
-const priceLevel = [
-    {
-        id: 1, 
-        value: 0,
-    },
-    {
-        id :2,
-        value: 1,
-    },
-    {
-        id: 3,
-        value: 2,
-    },
-    {
-        id: 4, 
-        value: 3,
-    },
-    {
-        id: 5, 
-        value: 4,
-    },
-];
-
-const radiusOptions = [
-    {
-        id: 1, 
-        value: '1',
-    },
-    {
-        id :2,
-        value: '2',
-    },
-    {
-        id: 3,
-        value:'3',
-    },
-    {
-        id: 4, 
-        value: '4',
-    },
-    {
-        id: 5, 
-        value:'5',
-    },
-    {
-        id: 6,
-        value: 'Max',
-    }
-];
-const open =[
-    {
-        id: 1,
-        value: 'Open',
-    },
-    {
-        id: 2,
-        value: 'Closed',
-    },
-];
 
 class App extends Component{
     constructor(props) {
@@ -127,7 +33,6 @@ class App extends Component{
             choice : [],
             choiceLat : 0,
             choiceLng : 0,
-            distance : '',
             openOrClosed: true,
             street: '',
             city: '',
@@ -273,24 +178,6 @@ class App extends Component{
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
                     <div className="row">
-                        Or choose to filter with the below options </div>
-                    <div className="row">
-                        Set distance from you in miles */}
-                    <UserChoice options = {radiusOptions} setOption={this.setRadius}/>
-                    </div>
-                    <div className="row" >
-                        Options in type of Entertainment
-                    <UserChoice options = {entOptions} setOption={this.setEntertainment}/>
-                    </div>
-                    <div className="row">
-                        Set Max Price Level
-                    <UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
-                    </div>
-                    <div className="row">
-                        Option to Filter by Open/Closed
-                    <UserChoice options = {open} setOption={this.setStatus}/>
-                    </div>
-                    <div className="row">
                         See Your Current Location
                     <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
                     </div>
@@ -304,4 +191,117 @@ class App extends Component{
 }}
 export default App;
 
+//** Old code from when using a function instead of Class.  Will delete when application works as intended **
+{/* <div className="row">
+Or choose to filter with the below options </div>
+<div className="row">
+Set distance from you in miles
+<UserChoice options = {radiusOptions} setOption={this.setRadius}/>
+</div>
+<div className="row" >
+Options in type of Entertainment
+<UserChoice options = {entOptions} setOption={this.setEntertainment}/>
+</div>
+<div className="row">
+Set Max Price Level
+<UserChoice options = {priceLevel} setOption={this.setPriceLevel}/>
+</div>
+<div className="row">
+Option to Filter by Open/Closed
+<UserChoice options = {open} setOption={this.setStatus}/>
+</div> */}
 
+// const entOptions = [
+//     {
+//         id: 1, 
+//         value: 'amusement_park',
+//     },
+//     {
+//         id :2,
+//         value: 'bowling_alley',
+//     },
+//     {
+//         id: 3,
+//         value:'museum',
+//     },
+//     {
+//         id: 4, 
+//         value: 'night_club',
+//     },
+//     {
+//         id: 5, 
+//         value:'aquarium',
+//     },
+//     {
+//         id: 6,
+//         value: 'casino',
+//     },
+//     {
+//         id: 7, 
+//         value: 'tourist_attraction',
+//     },
+//     {
+//         id: 8, 
+//         value: 'zoo',
+//     }
+// ];
+
+// const priceLevel = [
+//     {
+//         id: 1, 
+//         value: 0,
+//     },
+//     {
+//         id :2,
+//         value: 1,
+//     },
+//     {
+//         id: 3,
+//         value: 2,
+//     },
+//     {
+//         id: 4, 
+//         value: 3,
+//     },
+//     {
+//         id: 5, 
+//         value: 4,
+//     },
+// ];
+
+// const radiusOptions = [
+//     {
+//         id: 1, 
+//         value: '1',
+//     },
+//     {
+//         id :2,
+//         value: '2',
+//     },
+//     {
+//         id: 3,
+//         value:'3',
+//     },
+//     {
+//         id: 4, 
+//         value: '4',
+//     },
+//     {
+//         id: 5, 
+//         value:'5',
+//     },
+//     {
+//         id: 6,
+//         value: 'Max',
+//     }
+// ];
+// const open =[
+//     {
+//         id: 1,
+//         value: 'Open',
+//     },
+//     {
+//         id: 2,
+//         value: 'Closed',
+//     },
+// ];

@@ -32,6 +32,7 @@ export function AddressModal (props){
                 onClose={handleClose}
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
+                ariaHideApp={false}
                 >
                     <form onSubmit={handleSubmit} className="row-1" >
                         <h1>Change Your Location</h1>

@@ -7,7 +7,7 @@ function EntertainmentModal (props){
 return ( 
             <div className='EntertainmentModal'>
                 <button class="button" onClick={() => setItemIsOpen(true)}>Entertainment </button> 
-                <Modal isOpen={itemIsOpen} className="Modal">
+                <Modal isOpen={itemIsOpen} className="Modal" ariaHideApp={false}>
                     <button class="button" onClick={() => props.func()}>Click For Option</button>
                     <div>
                         {!props.place_review.data ? null:

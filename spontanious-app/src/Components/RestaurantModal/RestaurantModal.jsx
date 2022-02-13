@@ -7,7 +7,7 @@ function RestaurantModal (props){
 return ( 
             <div >
                 <button class="button" onClick={() => setItemIsOpen(true)}>Restaurant </button> 
-                <Modal  isOpen={itemIsOpen} className="Modal">
+                <Modal  isOpen={itemIsOpen} className="Modal" ariaHideApp={false}>
                     <button class="button" onClick={() => props.func()}>Click For Option</button>
                     <div>
                         {!props.place_review.data ? null:
