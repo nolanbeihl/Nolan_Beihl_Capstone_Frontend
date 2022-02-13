@@ -162,7 +162,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                {/* <input className="button" type="submit" value="Submit"/> */}
+                <input className="button" type="submit" value="Submit"/>
                 </form>
                 <form onSubmit={this.priceSubmit}>Price Level <br/>
                     <label className="choice-list">
@@ -172,7 +172,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                    {/* <input className="button" type="submit" value="Submit"/> */}
+                    <input className="button" type="submit" value="Submit"/>
                 </form>
                 <form onSubmit={this.radiusSubmit}>Distance In Miles From You <br/>
                     <label className="choice-list">
@@ -182,7 +182,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                    {/* <input className="button" type="submit" value="Submit"/> */}
+                    <input className="button" type="submit" value="Submit"/>
                 </form>
                 <form onSubmit={this.statusSubmit}>Open or Closed <br/>
                     <label className="choice-list">
@@ -192,7 +192,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                    {/* <input className="button" type="submit" value="Submit"/> */}
+                    <input className="button" type="submit" value="Submit"/>
                 </form>
                 <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
             </Modal>

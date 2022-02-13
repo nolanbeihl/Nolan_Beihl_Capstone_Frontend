@@ -40,7 +40,7 @@ class App extends Component{
         }
     }
     componentDidMount(){
-        this.explorerLocation()
+        // this.explorerLocation()
         this.convertLocation()
     }
     explorerLocation = async() =>{ 
