@@ -114,22 +114,22 @@ class FilterModal extends React.Component {
     
     entSubmit  (event) {
         this.setState({entOption: event.target.value});
-        this.props.ent(event);
+        this.props.ent(event.target.value);
         event.preventDefault();
     }
     priceSubmit  (event) {
         this.setState({priceLevel: event.target.value})
-        this.props.price(event);
+        this.props.price(event.target.value);
         event.preventDefault();
     }
     radiusSubmit  (event) {
         this.setState({radiusOption: event.target.value})
-        this.props.rad(event);
+        this.props.rad(event.target.value);
         event.preventDefault();
     }
     statusSubmit  (event) {
         this.setState({status: event.target.value})
-        this.props.status(event);
+        this.props.status(event.target.value);
         event.preventDefault();
     }
  
@@ -162,7 +162,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                <input className="button" type="submit" value="Submit"/>
+                {/* <input className="button" type="submit" value="Submit"/> */}
                 </form>
                 <form onSubmit={this.priceSubmit}>Price Level <br/>
                     <label className="choice-list">
@@ -172,7 +172,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                    <input className="button" type="submit" value="Submit"/>
+                    {/* <input className="button" type="submit" value="Submit"/> */}
                 </form>
                 <form onSubmit={this.radiusSubmit}>Distance In Miles From You <br/>
                     <label className="choice-list">
@@ -182,7 +182,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                    <input className="button" type="submit" value="Submit"/>
+                    {/* <input className="button" type="submit" value="Submit"/> */}
                 </form>
                 <form onSubmit={this.statusSubmit}>Open or Closed <br/>
                     <label className="choice-list">
@@ -192,7 +192,7 @@ class FilterModal extends React.Component {
                 ))}
                     </select> 
                     </label>
-                    <input className="button" type="submit" value="Submit"/>
+                    {/* <input className="button" type="submit" value="Submit"/> */}
                 </form>
                 <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
             </Modal>
