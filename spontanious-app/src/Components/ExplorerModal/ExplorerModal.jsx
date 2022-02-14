@@ -1,7 +1,7 @@
 import React , { Component, useState } from 'react';
 import Modal from 'react-modal';
 // import Form from 'react-bootstrap/Form';
-// import Explorer from '../Explorer/Explorer';
+import Explorer from '../Explorer/Explorer';
 
 export function AddressModal (props){
     const [open, setOpen] = useState(false);
@@ -70,7 +70,7 @@ export function AddressModal (props){
                         </label>
                         <button className="button-1" type="submit" onClick={handleSubmit}> Submit</button>
                         <button className="button-1" type="submit" onClick={handleClose}>Back To Menu</button>
-                        {/* <button className="button-1" type="submit" onClick={Explorer}>Explorer Information</button> */}
+                        <button className="button-1" type="submit" onClick={Explorer}>Explorer Information</button>
                     </form>
                 
                 </Modal>

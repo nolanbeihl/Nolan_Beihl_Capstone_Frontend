@@ -1,6 +1,6 @@
 import React , { Component, useState } from 'react';
 import Modal from 'react-modal';
-// import Form from 'react-bootstrap/Form';
+import Form from 'react-bootstrap/Form';
 // import Explorer from '../Explorer/Explorer';
 // import ExplorerModal from '../ExplorerModal/ExplorerModal';
 
@@ -154,8 +154,8 @@ class FilterModal extends React.Component {
                 aria-describedby="child-modal-description"
                 ariaHideApp={false}
                 >
-                <form onSubmit={this.entSubmit}>
-                    <label className="choice-list">Entertainment Type <br/>
+                <form onSubmit={this.entSubmit}>Entertainment Type <br/> 
+                    <label className="choice-list">
                     <select value={(this.state.entOption)} onChange={this.entSubmit}>
                 {this.state.entOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
