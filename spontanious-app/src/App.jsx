@@ -181,8 +181,9 @@ class App extends Component{
                         See Your Current Location
                     <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
                     </div>
-                    <AddressModal func={this.setAddress}/>
+                    <AddressModal func={this.setAddress} explorer={Explorer}/>
                     <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
+                    <Explorer/>
                 </h1>
                 
                </div>

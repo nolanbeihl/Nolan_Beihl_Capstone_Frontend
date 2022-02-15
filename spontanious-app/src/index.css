@@ -3,7 +3,6 @@
   background-image: url(./DC_National_Mall_Map.png);
   background-repeat: no-repeat;
   background-size:cover;
-  opacity:.8;
   top:0;
   z-index:-5;
   width: 100%;
@@ -68,9 +67,6 @@ div{
   background-color:rgb(255, 176, 103);
   align-items: center;
   justify-content: space-evenly;
-  margin: 0px;
-  padding: 0px;
-  width: auto;
   border-color: black;
 }
 .form.button{
