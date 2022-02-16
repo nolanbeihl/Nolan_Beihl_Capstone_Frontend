@@ -3,12 +3,17 @@ import Modal from 'react-modal';
 
 function RestaurantModal (props){
     const [itemIsOpen, setItemIsOpen] = useState(false)
+    const refresh = () =>{
+        props.func();
+
+    }
 
 return ( 
             <div >
                 <button class="button" onClick={() => setItemIsOpen(true)}>Restaurant </button> 
                 <Modal  isOpen={itemIsOpen} className="Modal" ariaHideApp={false}>
                     <button class="button" onClick={() => props.func()}>Click For Option</button>
+                    <button class="button" onClick={() => refresh()}>Refresh Option</button>
                     <div>
                         {!props.place_review.data ? null:
                             <>
@@ -18,17 +23,17 @@ return (
                             <div class="main-text">{`Restaurant Address:  ${props.restaurantPick.vicinity}`}</div>
                             <div class="main-text">{`Distance From You: ${props.distance}`}</div>
                             <div class="main-text">{`Reviews: `}</div>
-                            <div>{props.place_review.data.result.reviews[0].author_name}   Rated It:  {props.place_review.data.result.reviews[0].rating}</div>
-                            <div>{props.place_review.data.result.reviews[0].text}</div>
+                            <div class="main-text">{props.place_review.data.result.reviews[0].author_name}   Rated It:  {props.place_review.data.result.reviews[0].rating}</div>
+                            <div class="secondary-text">{props.place_review.data.result.reviews[0].text}</div>
                             <br/>
-                            <div>{props.place_review.data.result.reviews[1].author_name}  Rated It:  {props.place_review.data.result.reviews[1].rating}</div>
-                            <div>{props.place_review.data.result.reviews[1].text}</div>
+                            <div class="main-text">{props.place_review.data.result.reviews[1].author_name}  Rated It:  {props.place_review.data.result.reviews[1].rating}</div>
+                            <div class="secondary-text">{props.place_review.data.result.reviews[1].text}</div>
                             <br/>
-                            <div>{props.place_review.data.result.reviews[2].author_name}  Rated It:  {props.place_review.data.result.reviews[2].rating}</div>
-                            <div>{props.place_review.data.result.reviews[2].text}</div>
+                            <div class="main-text">{props.place_review.data.result.reviews[2].author_name}  Rated It:  {props.place_review.data.result.reviews[2].rating}</div>
+                            <div class="secondary-text">{props.place_review.data.result.reviews[2].text}</div>
                             <br/>
-                            <div>{props.place_review.data.result.reviews[3].author_name}  Rated It:  {props.place_review.data.result.reviews[3].rating}</div>
-                            <div>{props.place_review.data.result.reviews[3].text}</div></>
+                            <div class="main-text">{props.place_review.data.result.reviews[3].author_name}  Rated It:  {props.place_review.data.result.reviews[3].rating}</div>
+                            <div class="secondary-text">{props.place_review.data.result.reviews[3].text}</div></>
                         }
                         <button class="button" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                     </div>

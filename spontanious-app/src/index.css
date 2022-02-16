@@ -112,9 +112,16 @@ div{
 .main-text{
   font-weight: bolder;
   font: bolder;
+  text-align: center;
+}
+.secondary-text{
+  text-align: left;
+  font-size: 90%;
 }
 
 .Modal{
+ max-width: 100%;
+ max-height: 80%;
  top: 50%;
  left: 50%;
  position: fixed;
