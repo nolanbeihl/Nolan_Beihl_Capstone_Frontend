@@ -17,6 +17,9 @@
   opacity: .9;
   border-radius: 80px;
   vertical-align:bottom;
+  border-style: double;
+  border-color: black;
+  border-width: 10px;
 }
 
 .row {
@@ -28,6 +31,7 @@
   column-gap: 15%;
   text-align: center;
   justify-content: space-evenly;
+  
 }
 .row-1{
   border-radius: 1000px;
@@ -38,6 +42,7 @@
   column-gap: 15%;
   text-align: center;
   justify-content: space-evenly;
+ 
 }
 
 h1 {
@@ -68,6 +73,7 @@ div{
   align-items: center;
   justify-content: space-evenly;
   border-color: black;
+  
 }
 .form.button{
   max-width: 40%;
