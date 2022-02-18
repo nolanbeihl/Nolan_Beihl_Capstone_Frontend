@@ -66,13 +66,13 @@ class Explorer extends Component {
                     <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.lastName}/>
                     </label>
                 <label>Explorer Email
-                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.email}/>
+                    <input type = 'text' name="email" onChange = {this.handleChange} value = {this.state.email}/>
                     </label>
                 <label>Explorer User Name
-                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.user_name}/>
+                    <input type = 'text' name="user_name" onChange = {this.handleChange} value = {this.state.user_name}/>
                     </label>
                 <label>Explorer Password
-                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.password}/>
+                    <input type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password}/>
                     </label>
                 <label>Explorer Street
                     <input type = 'text' name="street" onChange = {this.handleChange} value = {this.state.street} placeholder="123+Street+Name+Rd"/>
