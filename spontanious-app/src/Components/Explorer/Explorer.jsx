@@ -11,6 +11,9 @@ class Explorer extends Component {
          explorer_id : '',
          firstName: '',
          lastName:'',
+         email:'',
+         user_name:'',
+         password:'',
          street:'',
          city:'',
          state:'',
@@ -28,12 +31,11 @@ class Explorer extends Component {
 
     addExplorer = async(event) =>{
         event.preventDefault();
-        await axios.post('http://127.0.0.1:8000/api/explorers_explorer/',this.state)
+        await axios.post('http://127.0.0.1:8000/api/auth/register/',this.state)
         alert('Explorer Has Been Created')
     }
     getExplorer = async() =>{
         let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/')
-        // alert(`${response.data[8].firstName}, ${response.data[8].lastName}, ${response.data[8].street}`)
     }
     onClickButton = e =>{
         e.preventDefault()
@@ -46,7 +48,7 @@ class Explorer extends Component {
     render(){
         return(
             <div >
-            <button className="button" onClick={this.onClickButton}>Explorer Information</button>
+            <button className="button" onClick={this.onClickButton}>Create Explorer </button>
             <Modal
             className="Modal"
             hideBackDrop
@@ -62,6 +64,15 @@ class Explorer extends Component {
                     </label>
                 <label>Explorer Last Name
                     <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.lastName}/>
+                    </label>
+                <label>Explorer Email
+                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.email}/>
+                    </label>
+                <label>Explorer User Name
+                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.user_name}/>
+                    </label>
+                <label>Explorer Password
+                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.password}/>
                     </label>
                 <label>Explorer Street
                     <input type = 'text' name="street" onChange = {this.handleChange} value = {this.state.street} placeholder="123+Street+Name+Rd"/>
