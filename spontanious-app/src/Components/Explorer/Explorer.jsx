@@ -12,7 +12,7 @@ class Explorer extends Component {
          firstName: '',
          lastName:'',
          email:'',
-         user_name:'',
+         userName:'',
          password:'',
          street:'',
          city:'',
@@ -69,7 +69,7 @@ class Explorer extends Component {
                     <input type = 'text' name="email" onChange = {this.handleChange} value = {this.state.email}/>
                     </label>
                 <label>Explorer User Name
-                    <input type = 'text' name="user_name" onChange = {this.handleChange} value = {this.state.user_name}/>
+                    <input type = 'text' name="userName" onChange = {this.handleChange} value = {this.state.userName}/>
                     </label>
                 <label>Explorer Password
                     <input type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password}/>
