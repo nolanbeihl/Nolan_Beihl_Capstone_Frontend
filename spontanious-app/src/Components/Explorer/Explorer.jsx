@@ -8,11 +8,10 @@ class Explorer extends Component {
     constructor(props){
         super(props);
         this.state = {
-         explorer_id : '',
-         firstName: '',
-         lastName:'',
+         first_name: '',
+         last_name:'',
          email:'',
-         userName:'',
+         username:'',
          password:'',
          street:'',
          city:'',
@@ -31,8 +30,26 @@ class Explorer extends Component {
 
     addExplorer = async(event) =>{
         event.preventDefault();
-        await axios.post('http://127.0.0.1:8000/api/auth/register/',this.state)
+        let user = {
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            username: this.state.username,
+            password: this.state.password,
+            street: this.state.street,
+            city: this.state.city,
+            state: this.state.state,
+            email: this.state.email,
+        }
+
+        await axios.post('http://127.0.0.1:8000/api/auth/register/', user)
         alert('Explorer Has Been Created')
+        this.loginExplore()
+    }
+
+    loginExplore = async() => {
+        //event.preventDefault();
+        let result = await axios.post('http://127.0.0.1:8000/api/auth/login/', {username:this.state.username, password:this.state.password})
+        console.log(result)
     }
     getExplorer = async() =>{
         let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/')
@@ -60,16 +77,16 @@ class Explorer extends Component {
             >
             <form onSubmit ={(event) => this.addExplorer(event)}>
                 <label>Explorer First Name
-                    <input type = 'text' name="firstName" onChange = {this.handleChange} value = {this.state.firstName}/>
+                    <input type = 'text' name="first_name" onChange = {this.handleChange} value = {this.state.first_name}/>
                     </label>
                 <label>Explorer Last Name
-                    <input type = 'text' name="lastName" onChange = {this.handleChange} value = {this.state.lastName}/>
+                    <input type = 'text' name="last_name" onChange = {this.handleChange} value = {this.state.last_name}/>
                     </label>
                 <label>Explorer Email
                     <input type = 'text' name="email" onChange = {this.handleChange} value = {this.state.email}/>
                     </label>
                 <label>Explorer User Name
-                    <input type = 'text' name="userName" onChange = {this.handleChange} value = {this.state.userName}/>
+                    <input type = 'text' name="username" onChange = {this.handleChange} value = {this.state.username}/>
                     </label>
                 <label>Explorer Password
                     <input type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password}/>
