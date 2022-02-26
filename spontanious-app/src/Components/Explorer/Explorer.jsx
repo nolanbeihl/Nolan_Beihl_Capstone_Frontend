@@ -43,6 +43,9 @@ class Explorer extends Component {
 
         await axios.post('http://127.0.0.1:8000/api/auth/register/', user)
         alert('Explorer Has Been Created')
+        const explorerJWT = localStorage.getItem('token');
+        await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer' + explorerJWT}})
+
         this.loginExplore()
     }
 
@@ -53,12 +56,14 @@ class Explorer extends Component {
         localStorage.setItem('token', result.data.access);
         const tokenFromStorage = localStorage.getItem('token');
         console.log(tokenFromStorage);
-
-
     }
-    // getExplorer = async() =>{
-    //     let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/')
-    // }
+
+
+    getExplorer = async() =>{
+        const explorerJWT = localStorage.getItem('token');
+        let result = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/', {headers: {Authorization: 'Bearer' + explorerJWT}});
+        console.log(result.data)
+    }
     onClickButton = e =>{
         e.preventDefault()
          this.setState({openModal : true})
