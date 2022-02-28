@@ -7,9 +7,9 @@ import './index.css';
 import EntertainmentModal from "./Components/EntertainmentModal/EntertainmentModal";
 import RestaurantModal from "./Components/RestaurantModal/RestaurantModal";
 import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
-import UserChoice from "./Components/UserChoice/UserChoice";
 import { AddressModal } from "./Components/ExplorerModal/ExplorerModal";
 import FilterModal, { Filter } from "./Components/FilterModal/FilterModal";
+import ExplorerLoginModal from "./Components/ExplorerLoginModal/ExplorerLoginModal";
 
 
 
@@ -183,6 +183,7 @@ class App extends Component{
                     </div>
                     <AddressModal func={this.setAddress} explorer={Explorer}/>
                     <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
+                    <ExplorerLoginModal/>
                     <Explorer/>
                 </h1>
                 

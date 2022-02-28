@@ -49,14 +49,12 @@ class Explorer extends Component {
     }
 
     loginExplore = async() => {
-        //event.preventDefault();
         let result = await axios.post('http://127.0.0.1:8000/api/auth/login/', {username:this.state.username, password:this.state.password})
         console.log(result)
         localStorage.setItem('token', result.data.access);
         const tokenFromStorage = localStorage.getItem('token');
         console.log(tokenFromStorage);
     }
-
 
     getExplorer = async() =>{
         const explorerJWT = localStorage.getItem('token');
