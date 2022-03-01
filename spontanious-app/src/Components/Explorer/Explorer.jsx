@@ -17,8 +17,6 @@ class Explorer extends Component {
          city:'',
          state:'',
          openModal: false,
-
-        
         }
     }
     
@@ -40,17 +38,17 @@ class Explorer extends Component {
             state: this.state.state,
             email: this.state.email,
         }
-
         await axios.post('http://127.0.0.1:8000/api/auth/register/', user)
         alert('Explorer Has Been Created')
         this.loginExplore()
         const explorerJWT = localStorage.getItem('token');
-        await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer' + explorerJWT}});
+        await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
     }
 
     loginExplore = async() => {
         let result = await axios.post('http://127.0.0.1:8000/api/auth/login/', {username:this.state.username, password:this.state.password})
         console.log(result)
+        localStorage.setItem('username', this.state.username);
         localStorage.setItem('token', result.data.access);
         const tokenFromStorage = localStorage.getItem('token');
         console.log(tokenFromStorage);
@@ -58,7 +56,7 @@ class Explorer extends Component {
 
     getExplorer = async() =>{
         const explorerJWT = localStorage.getItem('token');
-        let result = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/', {headers: {Authorization: 'Bearer' + explorerJWT}});
+        let result = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/', {headers: {Authorization: 'Bearer ' + explorerJWT}});
         console.log(result.data)
     }
     onClickButton = e =>{
@@ -68,7 +66,9 @@ class Explorer extends Component {
      onCloseModal = ()=>{
         this.setState({openModal : false})
     }
-
+    explorerInfo =()=>{
+        <ExplorerInfo/>
+    }
     render(){
         return(
             <div >
@@ -110,7 +110,7 @@ class Explorer extends Component {
                 <button onClick={this.handleSubmit} type = "submit" value = "Submit"> Submit information</button>
             </form>
             <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
-            <button className="button" onClick={this.getExplorer}>Get Explorers Information</button>
+            <button className="button" onClick={this.explorerInfo}>Get Explorers Information</button>
             </Modal>
             </div>
         )
@@ -119,61 +119,63 @@ class Explorer extends Component {
 
 export default Explorer;
 
-// class ExplorerInfo extends Component {
-//     constructor(props){
-//         super(props);
-//         this.state = {
-//          explorer_id : '',
-//          firstName: '',
-//          lastName:'',
-//          street:'',
-//          city:'',
-//          state:'',
-//          total_refresh: 0,
-//          total_usage: 0,
-//          openModal: false,
-//         response: [],
+class ExplorerInfo extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+        //  explorer_id : '',
+         firstName: '',
+         lastName:'',
+         street:'',
+         city:'',
+         state:'',
+        //  total_refresh: 0,
+        //  total_usage: 0,
+         openModal: false,
+        // response: [],
         
-//         }
-//     }
-//     getExplorer = async() =>{
-//         let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/')
-//         this.setState(response=response)
-//         // alert(`${response.data[8].firstName}, ${response.data[8].lastName}, ${response.data[8].street}`)
-//     }
-//     onClickButton = e =>{
-//         e.preventDefault()
-//          this.setState({openModal : true})
-//      }
-//      onCloseModal = ()=>{
-//         this.setState({openModal : false})
-//     }
+        }
+    }
+    getExplorer = async() =>{
+        let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/')
+        const user = response.fetch(localStorage.getItem('username'))
+        console.log({user})
+        // alert(`${response.data[8].firstName}, ${response.data[8].lastName}, ${response.data[8].street}`)
+    }
+    onClickButton = e =>{
+        e.preventDefault()
+         this.setState({openModal : true})
+     }
+     onCloseModal = ()=>{
+        this.setState({openModal : false})
+    }
 
-// render(){
-//     return(
-//         <div >
-//             <button className="button" onClick={this.onClickButton}>Explorer Info</button>
-//         <Modal
-//         className="Modal"
-//         hideBackDrop
-//         isOpen={this.state.openModal}
-//         onClose={this.onCloseModal}
-//         aria-labelledby="child-modal-title"
-//         aria-describedby="child-modal-description"
-//         ariaHideApp={false}
-//         >
-//         <div>
-//         {!this.response.data ? null:
-//                         <><div class="main-text">{`First Name:  ${this.response.data[8].firstName}`}</div>
-//                         <div class="main-text">{`Last Name:  ${this.response.data[8].lastName}`}</div>
-//                         <div class="main-text">{`Street:  ${this.response.data[8].street}`}</div>
-//                         <div class="main-text">{`City:  ${this.response.data[8].city}`}</div>
-//                         <div class="main-text">{`State: ${this.response.data[8].state}`}</div>                 
-//                         </>
-//         }
-//         </div>
-//         </Modal>
-//         </div>
-//         )
-//     }
-// }
+render(){
+    return(
+        <div >
+            <button className="button" onClick={this.onClickButton}>Explorer Info</button>
+        <Modal
+        className="Modal"
+        hideBackDrop
+        isOpen={this.state.openModal}
+        onClose={this.onCloseModal}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+        ariaHideApp={false}
+        >
+        <div>
+        {!this.response.data ? null:
+                        <><div class="main-text">{`First Name:  ${this.response.data[8].firstName}`}</div>
+                        <div class="main-text">{`Last Name:  ${this.response.data[8].lastName}`}</div>
+                        <div class="main-text">{`Street:  ${this.response.data[8].street}`}</div>
+                        <div class="main-text">{`City:  ${this.response.data[8].city}`}</div>
+                        <div class="main-text">{`State: ${this.response.data[8].state}`}</div>                 
+                        </>
+        }
+        </div>
+        <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
+        </Modal>
+        </div>
+        )
+    }
+}
