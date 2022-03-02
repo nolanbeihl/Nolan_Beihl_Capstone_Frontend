@@ -86,29 +86,29 @@ class App extends Component{
             });
     }
     
-    nearbyEntertainment = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
-        this.setState({
-            entertainments : [response.data]
-        })
-        var choice = [response.data.results];
-        if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
-            var randomchoice = choice[Math.floor(Math.random()*choice.length)];
-            var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-            var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
-            this.setState({
-                entertainmentPick : anotherchoice,
-                ent_review : place_review,
-                distance : distanceTo.data.rows[0].elements[0].distance.text,
-            })
-    }
+    // nearbyEntertainment = async() =>{
+    //     let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
+    //     this.setState({
+    //         entertainments : [response.data]
+    //     })
+    //     var choice = [response.data.results];
+    //     if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
+    //         var randomchoice = choice[Math.floor(Math.random()*choice.length)];
+    //         var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
+    //         var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
+    //         var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
+    //         this.setState({
+    //             entertainmentPick : anotherchoice,
+    //             ent_review : place_review,
+    //             distance : distanceTo.data.rows[0].elements[0].distance.text,
+    //         })
+    // }
    
-    setEntertainment = (setOption)=>{
-        this.setState({
-            entertainmentPick : setOption,
-        })  
-    }
+    // setEntertainment = (setOption)=>{
+    //     this.setState({
+    //         entertainmentPick : setOption,
+    //     })  
+    // }
     
     setLocation = async(setOption) => {
         this.setState({
@@ -169,19 +169,19 @@ class App extends Component{
         return(
             <div className="App">    
             <div className="container">
-            <h1>Select a type of Spontaneous Adventure</h1>
+            <h1>Welcome To Your Next Spontaneous Adventure</h1>
+            <br/>
+            <h1>Login Or Select If You Would Like To Make A New Account Or Continue As A Guest</h1>
                 <h1>
-                    <div className="row-1">
-                        If you want a completely random option just click on Entertainment or Restaurant</div>
                     <div className="row">
                     <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         See Your Current Location
                     <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
-                    </div>
-                    <AddressModal func={this.setAddress} explorer={Explorer}/>
+                    </div> */}
+                    {/* <AddressModal func={this.setAddress} explorer={Explorer}/> */}
                     <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
                     <ExplorerLoginModal/>
                     <Explorer/>
