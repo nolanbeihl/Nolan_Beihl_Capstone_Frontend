@@ -180,7 +180,8 @@ class App extends Component{
             <h1>Login Or Select If You Would Like To Make A New Account Or Continue As A Guest</h1>
                 <h1>
                     <div className="row">
-                    <EntertainmentModal props={this.state} func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
+                    <EntertainmentModal props={this.state}/>
+                    {/* <EntertainmentModal props={this.state} func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/>  */}
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
                     {/* <div className="row">
