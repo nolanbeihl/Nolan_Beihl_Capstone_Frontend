@@ -17,7 +17,7 @@ class App extends Component{
     constructor(props) {
         super(props);
         this.state= {
-            apiKey : 'AIzaSyBwQzBmt6jC2y_0yA8R3Cr9EduNwQL0hrQ',
+            apiKey : 'AIzaSyAORImFpOkztcGpu9e3iInNX_nB10Cn8AA',
             address : '0',
             lat: +38.9072,
             lng: -77.0369,
@@ -42,13 +42,19 @@ class App extends Component{
     componentDidMount(){
         // this.explorerLocation()
         this.convertLocation()
+        this.setAPIKey()
+    }
+    setAPIKey(){
+        localStorage.setItem('APIKey', this.state.apiKey);
     }
     explorerLocation = async() =>{ 
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
-        this.setState({
-            lat: (response.data.location.lat),
-            lng: (response.data.location.lng)
-        })
+        localStorage.setItem('lat', response.data.location.lat);
+        localStorage.setItem('lng', response.data.location.lng);
+        // this.setState({
+        //     lat: (response.data.location.lat),
+        //     lng: (response.data.location.lng)
+        // })
     }
     addressUpdate = async()=> {
         let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.street},+${this.state.city},+${this.state.state}&key=${this.state.apiKey}`)
@@ -104,11 +110,11 @@ class App extends Component{
     //         })
     // }
    
-    // setEntertainment = (setOption)=>{
-    //     this.setState({
-    //         entertainmentPick : setOption,
-    //     })  
-    // }
+    setEntertainment = (setOption)=>{
+        this.setState({
+            entertainmentPick : setOption,
+        })  
+    }
     
     setLocation = async(setOption) => {
         this.setState({
@@ -174,7 +180,7 @@ class App extends Component{
             <h1>Login Or Select If You Would Like To Make A New Account Or Continue As A Guest</h1>
                 <h1>
                     <div className="row">
-                    <EntertainmentModal func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
+                    <EntertainmentModal props={this.state} func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/> 
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
                     {/* <div className="row">
