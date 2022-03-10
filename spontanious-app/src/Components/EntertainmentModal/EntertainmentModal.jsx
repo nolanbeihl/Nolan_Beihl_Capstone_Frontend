@@ -5,14 +5,15 @@ class EntertainmentModal extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            entertainmentPick : '',
-            ent_review : '',
+            entertainmentPick : [],
+            ent_review : [],
             distance: 0,
             
             openModal : false,
         }; 
+        this.nearbyEntertainment = this.nearbyEntertainment.bind(this);
     }
-
+        
     //     this.statusSubmit = this.statusSubmit.bind(this);
     //     this.priceSubmit = this.priceSubmit.bind(this);
     //     this.radiusSubmit = this.radiusSubmit.bind(this);
@@ -34,9 +35,9 @@ class EntertainmentModal extends React.Component {
     }
     nearbyEntertainment = async() =>{
         let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.props.lat}%2C${this.props.props.lng}&radius=${this.props.props.radius}&type=${this.props.props.entertainmentPick}&open_now=${this.props.props.openOrClosed}&key=${this.props.props.apiKey}`)
-        // this.setState({
-        //     entertainments : [response.data]
-        // })
+        this.setState({
+            entertainments : [response.data]
+        })
         var choice = [response.data.results];
         if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
@@ -62,18 +63,19 @@ render(){
             <div className='EntertainmentModal'>
                 <button class="button" onClick={this.onClickButton}>Entertainment </button> 
                 <Modal
-                className="Modal"
-                hideBackDrop
-                isOpen={this.state.openModal}
-                onClose={this.onCloseModal}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-                ariaHideApp={false}
-                >
-                    <button class="button" onClick={() => this.nearbyEntertainment()}>Click For Option</button>
-                    <button class="button" onClick={() => this.nearbyEntertainment()}>Refresh Option</button>
-                    <div>
-                        {!this.state.entertainmentPick.data ? null:
+                 className="Modal"
+                 hideBackDrop
+                 isOpen={this.state.openModal}
+                 onClose={this.onCloseModal}
+                 aria-labelledby="child-modal-title"
+                 aria-describedby="child-modal-description"
+                 ariaHideApp={false}
+                 >
+                     
+                    <button class="button" onClick={this.nearbyEntertainment}>Click For Option</button>
+                    <button class="button" onClick={this.nearbyEntertainment}>Refresh Option</button>
+                  
+                        {!this.state.entertainmentPick ? null:
                             <><div class="main-text">{`Name:  ${this.state.entertainmentPick.name}`}</div>
                             <div class="main-text">{`Overall Rating:  ${this.state.entertainmentPick.rating}`}</div>
                             <div class="main-text">{`Price Level:  ${this.state.entertainmentPick.price_level}`}</div>
@@ -92,8 +94,8 @@ render(){
                             <div class="main-text">{this.state.ent_review.data.result.reviews[3].author_name}  Rated It:  {this.state.ent_review.data.result.reviews[3].rating}</div>
                             <div class="secondary-text">{this.state.ent_review.data.result.reviews[3].text}</div></>
                         }
-                        <button class="button" class="button" onClick={() => this.onCloseModal()}>Back To Menu</button>    
-                    </div>
+                    <button class="button" onClick={this.onCloseModal}>Back To Menu</button>   
+                    
                 </Modal>
             </div>
         );

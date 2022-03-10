@@ -74,7 +74,7 @@ class App extends Component{
     }
 
     nearbyRestaurant = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=restaurant&open_now=${this.state.openOrClosed}&key=${this.state.apiKey}`)
         this.setState({
             restaurants : [response.data]
         })
@@ -83,7 +83,7 @@ class App extends Component{
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
+            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.apiKey}`)
             if (anotherchoice.price_level === this.state.priceLevel);
                 this.setState({
                     restaruantPick : anotherchoice,
