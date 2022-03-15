@@ -6,7 +6,7 @@ class EntertainmentModal extends React.Component {
         super(props);
         this.state = {
             entertainmentPick : [],
-            ent_review : [],
+            ent_review : '0',
             distance: 0,
             
             openModal : false,
@@ -45,9 +45,9 @@ class EntertainmentModal extends React.Component {
             var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.props.props.apiKey}`)
             var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.props.props.lat}%2C${this.props.props.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.props.props.apiKey}`)
             this.setState({
-                entertainmentPick : [anotherchoice],
-                ent_review : [place_review],
-                distance : [distanceTo.data.rows[0].elements[0].distance.text],
+                entertainmentPick : anotherchoice,
+                ent_review : place_review,
+                distance : distanceTo.data.rows[0].elements[0].distance.text,
             })
             // localStorage.setItem('entertainmentPick', JSON.stringify(anotherchoice));
             // localStorage.setItem('ent_review', JSON.stringify(place_review));
@@ -75,7 +75,7 @@ render(){
                     <button class="button" onClick={this.nearbyEntertainment}>Click For Option</button>
                     <button class="button" onClick={this.nearbyEntertainment}>Refresh Option</button>
                   
-                        {!this.state.entertainmentPick ? null:
+                        {!this.state.ent_review.data ? null:
                             <><div class="main-text">{`Name:  ${this.state.entertainmentPick.name}`}</div>
                             <div class="main-text">{`Overall Rating:  ${this.state.entertainmentPick.rating}`}</div>
                             <div class="main-text">{`Price Level:  ${this.state.entertainmentPick.price_level}`}</div>
