@@ -13,19 +13,7 @@ class EntertainmentModal extends React.Component {
         }; 
         this.nearbyEntertainment = this.nearbyEntertainment.bind(this);
     }
-        
-    //     this.statusSubmit = this.statusSubmit.bind(this);
-    //     this.priceSubmit = this.priceSubmit.bind(this);
-    //     this.radiusSubmit = this.radiusSubmit.bind(this);
-    //     this.statusSubmit = this.statusSubmit.bind(this);
-    // }
-    
-    // statusSubmit  (event) {
-    //     this.setState({status: event.target.value})
-    //     this.props.status(event.target.value);
-    //     event.preventDefault();
-    // }
- 
+         
     onClickButton = e =>{
        e.preventDefault()
         this.setState({openModal : true})
@@ -34,7 +22,11 @@ class EntertainmentModal extends React.Component {
         this.setState({openModal : false})
     }
     nearbyEntertainment = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.props.lat}%2C${this.props.props.lng}&radius=${this.props.props.radius}&type=${this.props.props.entertainmentPick}&open_now=${this.props.props.openOrClosed}&key=${this.props.props.apiKey}`)
+        let apiKey = localStorage.getItem('APIKey')
+        let lat = localStorage.getItem('lat')
+        let lng = localStorage.getItem('lng')
+        let radius = localStorage.getItem('radius')
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lng}&radius=${radius}&type=${this.props.props.entertainmentPick}&open_now=${this.props.props.openOrClosed}&key=${apiKey}`)
         this.setState({
             entertainments : [response.data]
         })
@@ -42,8 +34,8 @@ class EntertainmentModal extends React.Component {
         if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
             var randomchoice = choice[Math.floor(Math.random()*choice.length)];
             var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-            var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.props.props.apiKey}`)
-            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.props.props.lat}%2C${this.props.props.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.props.props.apiKey}`)
+            var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${apiKey}`)
+            var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${lat}%2C${lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${apiKey}`)
             this.setState({
                 entertainmentPick : anotherchoice,
                 ent_review : place_review,
@@ -103,6 +95,17 @@ render(){
 }
 export default EntertainmentModal;
 
+   //     this.statusSubmit = this.statusSubmit.bind(this);
+    //     this.priceSubmit = this.priceSubmit.bind(this);
+    //     this.radiusSubmit = this.radiusSubmit.bind(this);
+    //     this.statusSubmit = this.statusSubmit.bind(this);
+    // }
+    
+    // statusSubmit  (event) {
+    //     this.setState({status: event.target.value})
+    //     this.props.status(event.target.value);
+    //     event.preventDefault();
+    // }
 
 // function EntertainmentModal (props){
 //     const [itemIsOpen, setItemIsOpen] = useState(false)

@@ -133,11 +133,15 @@ class ExplorerInfo extends Component {
          state:'',
         //  total_refresh: 0,
         //  total_usage: 0,
-         openModal: false,
-        // response: [],
+        openModal: false,
+        response: [],
         
         }
     }
+    componentDidMount() {
+        this.getExplorer();
+    }
+
     getExplorer = async() =>{
         let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/')
         const user = response.fetch(localStorage.getItem('username'))
@@ -146,9 +150,9 @@ class ExplorerInfo extends Component {
     }
     onClickButton = e =>{
         e.preventDefault()
-         this.setState({openModal : true})
+        this.setState({openModal : true})
      }
-     onCloseModal = ()=>{
+    onCloseModal = ()=>{
         this.setState({openModal : false})
     }
 

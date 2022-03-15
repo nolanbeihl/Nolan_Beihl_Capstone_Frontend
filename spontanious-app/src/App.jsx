@@ -42,10 +42,13 @@ class App extends Component{
     componentDidMount(){
         // this.explorerLocation()
         this.convertLocation()
-        this.setAPIKey()
+        this.setItems()
     }
-    setAPIKey(){
+    setItems(){
         localStorage.setItem('APIKey', this.state.apiKey);
+        localStorage.setItem('lat', +38.9072);
+        localStorage.setItem('lng', -77.0369);
+        localStorage.setItem('radius', 50000);
     }
     explorerLocation = async() =>{ 
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
@@ -91,25 +94,7 @@ class App extends Component{
                     distance : distanceTo.data.rows[0].elements[0].distance.text,
             });
     }
-    
-    // nearbyEntertainment = async() =>{
-    //     let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
-    //     this.setState({
-    //         entertainments : [response.data]
-    //     })
-    //     var choice = [response.data.results];
-    //     if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
-    //         var randomchoice = choice[Math.floor(Math.random()*choice.length)];
-    //         var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
-    //         var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
-    //         var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
-    //         this.setState({
-    //             entertainmentPick : anotherchoice,
-    //             ent_review : place_review,
-    //             distance : distanceTo.data.rows[0].elements[0].distance.text,
-    //         })
-    // }
-   
+      
     setEntertainment = (setOption)=>{
         this.setState({
             entertainmentPick : setOption,
@@ -130,29 +115,18 @@ class App extends Component{
   
     setRadius = async(setOption) => {
         if (setOption == 1)
-            this.setState({
-                radius : 1609,
-            })
+            localStorage.setItem('radius', 1609);
         if (setOption == 2)
-            this.setState({
-                radius : 3218,
-            })
+            localStorage.setItem('radius', 3218);
         if (setOption == 3)
-            this.setState({
-                radius : 4828
-            })    
+            localStorage.setItem('radius', 4828);                
         if (setOption == 4)
-            this.setState({
-                radius : 6437
-            })
+            localStorage.setItem('radius', 6437);            
         if (setOption == 5)
-            this.setState({
-                radius : 8046
-        })
+            localStorage.setItem('radius', 8046);        
         if (setOption ==='Max')
-            this.setState({
-                radius : 50000
-            })
+            localStorage.setItem('radius', 5000);
+            
     }
 
     setStatus = async(setOption)=> {
@@ -181,14 +155,8 @@ class App extends Component{
                 <h1>
                     <div className="row">
                     <EntertainmentModal props={this.state}/>
-                    {/* <EntertainmentModal props={this.state} func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/>  */}
                     <RestaurantModal func = {this.nearbyRestaurant} restaurantPick ={this.state.restaruantPick} place_review={this.state.rest_review} distance={this.state.distance}/>
                     </div>
-                    {/* <div className="row">
-                        See Your Current Location
-                    <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
-                    </div> */}
-                    {/* <AddressModal func={this.setAddress} explorer={Explorer}/> */}
                     <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
                     <ExplorerLoginModal/>
                     <Explorer/>
@@ -219,6 +187,13 @@ Set Max Price Level
 Option to Filter by Open/Closed
 <UserChoice options = {open} setOption={this.setStatus}/>
 </div> */}
+                    {/* <EntertainmentModal props={this.state} func = {this.nearbyEntertainment} entertainmentPick ={this.state.entertainmentPick} place_review={this.state.ent_review} distance={this.state.distance}/>  */}
+                    {/* <div className="row">
+                        See Your Current Location
+                    <ExplorerModal func = {this.explorerLocation} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
+                    </div> */}
+                    {/* <AddressModal func={this.setAddress} explorer={Explorer}/> */}
+
 
 // const entOptions = [
 //     {
@@ -314,3 +289,21 @@ Option to Filter by Open/Closed
 //         value: 'Closed',
 //     },
 // ];
+
+ // nearbyEntertainment = async() =>{
+    //     let response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.lat}%2C${this.state.lng}&radius=${this.state.radius}&type=${this.state.entertainmentPick}&open_now=${this.state.openOrClosed}&key=${this.state.anotherKey}`)
+    //     this.setState({
+    //         entertainments : [response.data]
+    //     })
+    //     var choice = [response.data.results];
+    //     if ((choice.opening_hours) = true && ((choice.types) != "lodging"))
+    //         var randomchoice = choice[Math.floor(Math.random()*choice.length)];
+    //         var anotherchoice = randomchoice[Math.floor(Math.random()*randomchoice.length)];
+    //         var place_review = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${anotherchoice.place_id}&fields=review&key=${this.state.apiKey}`)
+    //         var distanceTo = await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.lat}%2C${this.state.lng}&destinations=${anotherchoice.geometry.location.lat}%2C${anotherchoice.geometry.location.lng}&key=${this.state.anotherKey}`)
+    //         this.setState({
+    //             entertainmentPick : anotherchoice,
+    //             ent_review : place_review,
+    //             distance : distanceTo.data.rows[0].elements[0].distance.text,
+    //         })
+    // }
