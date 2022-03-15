@@ -43,6 +43,7 @@ class Explorer extends Component {
         this.loginExplore()
         const explorerJWT = localStorage.getItem('token');
         await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        this.onCloseModal();
     }
 
     loginExplore = async() => {
@@ -83,31 +84,32 @@ class Explorer extends Component {
             ariaHideApp={false}
             >
             <form onSubmit ={(event) => this.addExplorer(event)}>
-                <label>Explorer First Name
-                    <input type = 'text' name="first_name" onChange = {this.handleChange} value = {this.state.first_name}/>
-                    </label>
-                <label>Explorer Last Name
-                    <input type = 'text' name="last_name" onChange = {this.handleChange} value = {this.state.last_name}/>
-                    </label>
-                <label>Explorer Email
-                    <input type = 'text' name="email" onChange = {this.handleChange} value = {this.state.email}/>
-                    </label>
-                <label>Explorer User Name
-                    <input type = 'text' name="username" onChange = {this.handleChange} value = {this.state.username}/>
-                    </label>
-                <label>Explorer Password
-                    <input type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password}/>
-                    </label>
-                <label>Explorer Street
-                    <input type = 'text' name="street" onChange = {this.handleChange} value = {this.state.street} placeholder="123+Street+Name+Rd"/>
-                    </label>
-                <label>Explorer City
-                    <input type = 'text' name="city" onChange = {this.handleChange} value = {this.state.city} placeholder="City+Name"/>
-                    </label>
-                <label>Explorer State
-                    <input type = 'text' name="state" onChange = {this.handleChange} value = {this.state.state} placeholder="CA"/>
-                    </label>
-                <button onClick={this.handleSubmit} type = "submit" value = "Submit"> Submit information</button>
+                    <h2>Please Fill In The Information Below</h2>
+                    <div>
+                    <input className='formInput' type = 'text' name="first_name" onChange = {this.handleChange} value = {this.state.first_name} placeholder="First Name"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="last_name" onChange = {this.handleChange} value = {this.state.last_name} placeholder="Last Name"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="email" onChange = {this.handleChange} value = {this.state.email} placeholder="Email Address"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="username" onChange = {this.handleChange} value = {this.state.username} placeholder="User Name"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password} placeholder="Min 8 Character Password"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="street" onChange = {this.handleChange} value = {this.state.street} placeholder="123+Street+Name+Rd"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="city" onChange = {this.handleChange} value = {this.state.city} placeholder="City+Name"/>
+                    </div>
+                    <div>
+                    <input className='formInput' type = 'text' name="state" onChange = {this.handleChange} value = {this.state.state} placeholder="2 letter State"/>
+                    </div>
+                <button className="button" type = "submit" value = "Submit"> Submit information</button>
             </form>
             <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
             <button className="button" onClick={this.explorerInfo}>Get Explorers Information</button>

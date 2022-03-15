@@ -156,7 +156,7 @@ class FilterModal extends React.Component {
                 >
                 <form onSubmit={this.entSubmit}>Entertainment Type <br/> 
                     <label className="choice-list">
-                    <select value={(this.state.entOption)} onChange={this.entSubmit}>
+                    <select value={(this.state.entOption)} onChange={this.entSubmit} placeholder='Entertainment'>
                 {this.state.entOptions.map(item =>  (
                     <option key={item.id} value={item.value}>{item.value}</option>    
                 ))}

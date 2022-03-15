@@ -30,8 +30,10 @@ class ExplorerLoginModal extends Component {
     loginExplore = async(event) => {
         event.preventDefault();
         let result = await axios.post('http://127.0.0.1:8000/api/auth/login/',{username:this.state.username, password:this.state.password})
+        localStorage.setItem('username' , this.state.username);
         localStorage.setItem('token', result.data.access);
-        alert(`${this.state.username}  is now logged in`)
+        // alert(`${this.state.username}  is now logged in`);
+        this.onCloseModal();
     }
     render(){
         return(
@@ -47,13 +49,14 @@ class ExplorerLoginModal extends Component {
             ariaHideApp={false}
             >
             <form onSubmit ={(event) => this.loginExplore(event)}>
-                <label>Explorer User Name
-                    <input type = 'text' name="username" onChange = {this.handleChange} value = {this.state.username}/>
-                    </label>
-                <label>Explorer Password
-                    <input type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password}/>
-                    </label>
-                <button onClick={this.handleSubmit} type = "submit" value = "Submit"> Login</button>
+                    <h2>Please Enter The Fields Below</h2>
+                    <div>
+                    <input type = 'text' name="username" onChange = {this.handleChange} value = {this.state.username} placeholder="User Name"/>
+                    </div>
+                    <div>
+                    <input type = 'text' name="password" onChange = {this.handleChange} value = {this.state.password} placeholder="Password"/>
+                    </div>
+                <button className="button" type = "submit" value = "Submit"> Login</button>
             </form>
             <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
             </Modal>

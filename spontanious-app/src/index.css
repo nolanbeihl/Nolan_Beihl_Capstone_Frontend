@@ -135,7 +135,10 @@ div{
 }
 .formInput{
   padding: 8px;
-  font-weight: bolder ;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .ReactModal__Overlay {
