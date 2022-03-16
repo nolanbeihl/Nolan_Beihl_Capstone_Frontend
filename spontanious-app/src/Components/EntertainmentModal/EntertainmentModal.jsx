@@ -41,12 +41,6 @@ class EntertainmentModal extends React.Component {
                 ent_review : place_review,
                 distance : distanceTo.data.rows[0].elements[0].distance.text,
             })
-            // localStorage.setItem('entertainmentPick', JSON.stringify(anotherchoice));
-            // localStorage.setItem('ent_review', JSON.stringify(place_review));
-            // localStorage.setItem('distance', JSON.stringify(distanceTo.data.rows[0].elements[0].distance.text));
-            // let test = JSON.parse(localStorage.getItem('entertainmentPick'));
-            // console.log(test);
-            // console.log('did it work?');
         }
     
 render(){
@@ -95,6 +89,13 @@ render(){
 }
 export default EntertainmentModal;
 
+// localStorage.setItem('entertainmentPick', JSON.stringify(anotherchoice));
+            // localStorage.setItem('ent_review', JSON.stringify(place_review));
+            // localStorage.setItem('distance', JSON.stringify(distanceTo.data.rows[0].elements[0].distance.text));
+            // let test = JSON.parse(localStorage.getItem('entertainmentPick'));
+            // console.log(test);
+            // console.log('did it work?');
+            
    //     this.statusSubmit = this.statusSubmit.bind(this);
     //     this.priceSubmit = this.priceSubmit.bind(this);
     //     this.radiusSubmit = this.radiusSubmit.bind(this);
