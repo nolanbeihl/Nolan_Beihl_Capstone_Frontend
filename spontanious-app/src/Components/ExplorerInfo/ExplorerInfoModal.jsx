@@ -16,7 +16,7 @@ class ExplorerInfo extends Component {
         //  total_refresh: 0,
         //  total_usage: 0,
         openModal: false,
-        response: '',
+        response: [],
         
         }
     }
@@ -27,7 +27,11 @@ class ExplorerInfo extends Component {
     getExplorer = async() =>{
         let jwt = localStorage.getItem('token');
         let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/', {headers: {Authorization: 'Bearer ' + jwt}});
-        
+        this.setState({
+            response : response
+        })
+        console.log(response)
+
     }
     onClickButton = e =>{
         e.preventDefault()
@@ -52,14 +56,15 @@ render(){
         >
         <div>
         {!this.response ? null:
-                        <><div class="main-text">{`First Name:  ${this.response.data[8].firstName}`}</div>
-                        <div class="main-text">{`Last Name:  ${this.response.data[8].lastName}`}</div>
-                        <div class="main-text">{`Street:  ${this.response.data[8].street}`}</div>
-                        <div class="main-text">{`City:  ${this.response.data[8].city}`}</div>
-                        <div class="main-text">{`State: ${this.response.data[8].state}`}</div>                 
+                        <><div class="main-text">{`First Name:  ${this.response.data[0].first_name}`}</div>
+                        <div class="main-text">{`Last Name:  ${this.response.data[0].last_name}`}</div>
+                        <div class="main-text">{`Street:  ${this.response.data[0].street}`}</div>
+                        <div class="main-text">{`City:  ${this.response.data[0].city}`}</div>
+                        <div class="main-text">{`State: ${this.response.data[0].state}`}</div>                 
                         </>
         }
         </div>
+        <button className="button" onClick={this.getExplorer}>Get Explorer Information</button>
         <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
         </Modal>
         </div>
