@@ -26,9 +26,10 @@ class ExplorerInfo extends Component {
 
     getExplorer = async() =>{
         let jwt = localStorage.getItem('token');
-        let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/', {headers: {Authorization: 'Bearer ' + jwt}});
+        let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/info/', {headers: {Authorization: 'Bearer ' + jwt}});
+        console.log(response);
         this.setState({
-            response : response
+            response : response.data
         })
         console.log(response)
 

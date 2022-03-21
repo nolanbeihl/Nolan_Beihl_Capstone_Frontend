@@ -10,6 +10,7 @@ import ExplorerModal from "./Components/ExplorerModal/ExplorerModal";
 import { AddressModal } from "./Components/ExplorerModal/ExplorerModal";
 import FilterModal, { Filter } from "./Components/FilterModal/FilterModal";
 import ExplorerLoginModal from "./Components/ExplorerLoginModal/ExplorerLoginModal";
+import ExplorerInfo from "./Components/ExplorerInfo/ExplorerInfoModal";
 
 
 
@@ -160,6 +161,7 @@ class App extends Component{
                     <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
                     <ExplorerLoginModal/>
                     <Explorer/>
+                    <ExplorerInfo/>
                 </h1>
                 
                </div>

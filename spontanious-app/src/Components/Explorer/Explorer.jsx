@@ -43,7 +43,8 @@ class Explorer extends Component {
         alert('Explorer Has Been Created')
         this.loginExplore()
         const explorerJWT = localStorage.getItem('token');
-        await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        let test = await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        console.log(test);
         this.onCloseModal();
     }
 
@@ -58,7 +59,7 @@ class Explorer extends Component {
 
     getExplorer = async() =>{
         const explorerJWT = localStorage.getItem('token');
-        let result = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/', {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        let result = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/info/', {headers: {Authorization: 'Bearer ' + explorerJWT}});
         console.log(result.data)
     }
     onClickButton = e =>{
