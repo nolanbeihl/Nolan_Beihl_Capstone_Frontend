@@ -28,6 +28,7 @@ class ExplorerInfo extends Component {
         let jwt = localStorage.getItem('token');
         let response = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/info/', {headers: {Authorization: 'Bearer ' + jwt}});
         console.log(response);
+        // The respone is only resulting in an empty array, have not determined what is causing this response yet
         this.setState({
             response : response.data
         })

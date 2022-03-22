@@ -44,6 +44,8 @@ class Explorer extends Component {
         this.loginExplore()
         const explorerJWT = localStorage.getItem('token');
         let test = await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        // let test2 = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/info/',  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        // console.log(test2);
         console.log(test);
         this.onCloseModal();
     }
