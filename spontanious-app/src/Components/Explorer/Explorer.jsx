@@ -27,6 +27,7 @@ class Explorer extends Component {
         })
     }
 
+
     addExplorer = async(event) =>{
         event.preventDefault();
         let user = {
@@ -39,14 +40,17 @@ class Explorer extends Component {
             state: this.state.state,
             email: this.state.email,
         }
+        localStorage.setItem('street', this.state.street)
+        localStorage.setItem('city', this.state.city)
+        localStorage.setItem('state', this.state.state)
         await axios.post('http://127.0.0.1:8000/api/auth/register/', user)
         alert('Explorer Has Been Created')
         this.loginExplore()
-        const explorerJWT = localStorage.getItem('token');
-        let test = await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
-        let test2 = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/info/',  {headers: {Authorization: 'Bearer ' + explorerJWT}});
-        console.log(test2);
-        console.log(test);
+        // const explorerJWT = localStorage.getItem('token');
+        // let test = await axios.post('http://127.0.0.1:8000/api/explorers_explorer/', user,  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        // let test2 = await axios.get('http://127.0.0.1:8000/api/explorers_explorer/info/',  {headers: {Authorization: 'Bearer ' + explorerJWT}});
+        // console.log(test2);
+        // console.log(test);
         this.onCloseModal();
     }
 
@@ -55,6 +59,7 @@ class Explorer extends Component {
         console.log(result)
         localStorage.setItem('username', this.state.username);
         localStorage.setItem('token', result.data.access);
+
         const tokenFromStorage = localStorage.getItem('token');
         console.log(tokenFromStorage);
     }
@@ -70,6 +75,9 @@ class Explorer extends Component {
      }
      onCloseModal = ()=>{
         this.setState({openModal : false})
+        localStorage.setItem('street', this.state.street)
+        localStorage.setItem('city', this.state.city)
+        localStorage.setItem('state', this.state.state)
     }
     
     render(){
@@ -114,7 +122,7 @@ class Explorer extends Component {
                 <button className="button" type = "submit" value = "Submit"> Submit information</button>
             </form>
             <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
-            <ExplorerInfo/>
+            {/* <ExplorerInfo/> */}
             </Modal>
             </div>
         )

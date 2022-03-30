@@ -23,7 +23,7 @@ class App extends Component{
             lat: +38.9072,
             lng: -77.0369,
             anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
-            readableAddress : '0',
+            readableAddress : '',
             entertainmentPick : '',
             distance : 0,
             optionPicked : '0',
@@ -41,36 +41,51 @@ class App extends Component{
         }
     }
     componentDidMount(){
-        // this.explorerLocation()
+        //this.explorerLocation()
         this.convertLocation()
         this.setItems()
     }
     setItems(){
         localStorage.setItem('APIKey', this.state.apiKey);
-        localStorage.setItem('lat', +38.9072);
-        localStorage.setItem('lng', -77.0369);
+        //localStorage.setItem('lat', +38.9072);
+        //localStorage.setItem('lng', -77.0369);
         localStorage.setItem('radius', 50000);
+        this.setState({
+            street : localStorage.getItem('street'),
+            city: localStorage.getItem('city'),
+            state: localStorage.getItem('state'),
+        })
+        this.convertLocation()
     }
     explorerLocation = async() =>{ 
         let response = await axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${this.state.apiKey}`)
         localStorage.setItem('lat', response.data.location.lat);
         localStorage.setItem('lng', response.data.location.lng);
+        this.convertLocation();
         // this.setState({
         //     lat: (response.data.location.lat),
         //     lng: (response.data.location.lng)
         // })
     }
     addressUpdate = async()=> {
+        this.setItems()
         let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.street},+${this.state.city},+${this.state.state}&key=${this.state.apiKey}`)
+        console.log(response)
         this.setState({
             lat: (response.data.results[0].geometry.location.lat),
             lng: (response.data.results[0].geometry.location.lng),
         })
+        localStorage.setItem('lat', response.data.results[0].geometry.location.lat)
+        localStorage.setItem('lng', response.data.results[0].geometry.location.lng)
+        // this.explorerLocation()
         this.convertLocation()
+        
     }
     
     convertLocation = async() =>{
-        let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.lat},${this.state.lng}&key=${this.state.anotherKey}`)
+        let lat = localStorage.getItem('lat')
+        let lng = localStorage.getItem('lng')
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${this.state.apiKey}`)
         this.setState({
             address : [response.data.data],
             readableAddress : (response.data.results[0].formatted_address),
@@ -152,7 +167,7 @@ class App extends Component{
             <div className="container">
             <h1>Welcome To Your Next Spontaneous Adventure</h1>
             <br/>
-            <h1>Login Or Select If You Would Like To Make A New Account Or Continue As A Guest</h1>
+            <h1>Login Or Select If You Would Like To Make A New Account </h1>
                 <h1>
                     <div className="row">
                     <EntertainmentModal props={this.state}/>
@@ -161,7 +176,8 @@ class App extends Component{
                     <FilterModal rad={this.setRadius} status={this.setStatus} price={this.setPriceLevel} ent={this.setEntertainment}/>
                     <ExplorerLoginModal/>
                     <Explorer/>
-                    <ExplorerInfo/>
+                    <ExplorerModal  convert={this.addressUpdate} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
+                    {/* <ExplorerInfo/> */}
                 </h1>
                 
                </div>
@@ -172,6 +188,7 @@ export default App;
 
 //** Old code from when using a function instead of Class.  Will delete when application works as intended **
 {/* <div className="row">
+Or Continue As A Guest
 Or choose to filter with the below options </div>
 <div className="row">
 Set distance from you in miles

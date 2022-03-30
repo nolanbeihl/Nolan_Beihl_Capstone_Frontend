@@ -70,7 +70,7 @@ export function AddressModal (props){
                         </label>
                         <button className="button-1" type="submit" onClick={handleSubmit}> Submit</button>
                         <button className="button-1" type="submit" onClick={handleClose}>Back To Menu</button>
-                        <button className="button-1" type="submit" onClick={props.Explorer}>Explorer Information</button>
+                        {/* <button className="button-1" type="submit" onClick={props.Explorer}>Explorer Information</button> */}
                     </form>
                 
                 </Modal>
@@ -99,7 +99,7 @@ export default function ExplorerModal(props){
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
                 >
-                     <button className="button-1" onClick={() => props.func()}>Refresh Location</button>
+                     <button className="button-1" onClick={() => props.convert()}>Refresh Location</button>
                      <button className="button-1" onClick={() => setItemIsOpen(false)}>Back To Menu</button>
                      {!props.readableAddress ? null:
                      <div className="address">
