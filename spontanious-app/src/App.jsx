@@ -24,7 +24,7 @@ class App extends Component{
             lng: -77.0369,
             anotherKey: 'AIzaSyB1j0XHBYGZI5Pi0ryYwSb29NQNWp3uqMo',
             readableAddress : '',
-            entertainmentPick : '',
+            entertainmentPick : 'tourist_attraction',
             distance : 0,
             optionPicked : '0',
             rest_review : '0',
