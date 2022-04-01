@@ -8,8 +8,8 @@ class ExplorerInfo extends Component {
         super(props);
         this.state = {
         //  explorer_id : '',
-         firstName: '',
-         lastName:'',
+         first_name: '',
+         last_name:'',
          street:'',
          city:'',
          state:'',

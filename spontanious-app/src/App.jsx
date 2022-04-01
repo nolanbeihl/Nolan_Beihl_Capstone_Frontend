@@ -177,7 +177,7 @@ class App extends Component{
                     <ExplorerLoginModal/>
                     <Explorer/>
                     <ExplorerModal  convert={this.addressUpdate} readableAddress ={this.state.readableAddress} setOption={this.setAddress}/>
-                    {/* <ExplorerInfo/> */}
+                    <ExplorerInfo/>
                 </h1>
                 
                </div>

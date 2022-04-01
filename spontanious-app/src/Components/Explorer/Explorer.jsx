@@ -122,7 +122,7 @@ class Explorer extends Component {
                 <button className="button" type = "submit" value = "Submit"> Submit information</button>
             </form>
             <button className="button" onClick={this.onCloseModal}>Back To Menu</button>
-            {/* <ExplorerInfo/> */}
+            <ExplorerInfo/>
             </Modal>
             </div>
         )
